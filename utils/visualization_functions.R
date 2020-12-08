@@ -1,4 +1,5 @@
 source("../data_mining/global.R")
+library(ggplot2) 
 
 # Given a uniprot id and 'dicty' or 'neutro', plot the spectral count vs the bait + condition
 plot_spectral_bait_condition_using_uniprot<- function(uniprot_id, what){

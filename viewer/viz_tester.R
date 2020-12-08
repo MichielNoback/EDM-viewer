@@ -7,3 +7,4 @@ plot_spectral_bait_condition_using_uniprot('Q54YT4', 'dicty')
 plot_spectral_using_condition("Normal", 'dicty')
 plot_spectral_using_bait("Galpha8", 'dicty')
 boxplot_spectral_using_bait("Galpha8", 'dicty')
+
