@@ -1,0 +1,462 @@
+Identified Proteins (461)	Accession Number	Mass	Protein Grouping Ambiguity	KP Rap IP
+Ras-related protein rapA OS=Dictyostelium discoideum GN=rapA PE=1 SV=1	P18613	1		553
+Glutathione S-transferase domain-containing protein OS=Dictyostelium discoideum GN=efa1G PE=4 SV=1	B0G141	1		377
+Elongation factor 1-alpha OS=Dictyostelium discoideum GN=eef1a1 PE=1 SV=2	P18624	1		151
+Elongation factor 2 OS=Dictyostelium discoideum GN=efbA PE=1 SV=2	P15112	1		88
+Major actin OS=Dictyostelium discoideum GN=act1 PE=1 SV=2	P07830 (+1)	1	TRUE	75
+Putative actin binding protein OS=Dictyostelium discoideum GN=DDB_0232319 PE=4 SV=1	Q54TU2	1		84
+Heat shock cognate 70 kDa protein 1 OS=Dictyostelium discoideum GN=hspB PE=1 SV=2	P36415	1	TRUE	80
+Heat shock cognate 90 kDa protein OS=Dictyostelium discoideum GN=hspD PE=1 SV=2	P54651	1	TRUE	65
+Alpha-actinin A OS=Dictyostelium discoideum GN=abpA PE=1 SV=2	P05095	1		71
+Putative glutathione S-transferase alpha-3 OS=Dictyostelium discoideum GN=gsta3 PE=1 SV=1	Q54VI4	1		54
+Protein PYR1-3 OS=Dictyostelium discoideum GN=pyr1-3 PE=2 SV=3	P20054	1		50
+Gelation factor OS=Dictyostelium discoideum GN=abpC PE=1 SV=1	P13466	1		62
+Putative glutathione S-transferase alpha-2 OS=Dictyostelium discoideum GN=gsta2-1 PE=1 SV=1	Q556G3	1		41
+Glyceraldehyde-3-phosphate dehydrogenase OS=Dictyostelium discoideum GN=gpdA PE=1 SV=2	Q94469	1		41
+Tubulin beta chain OS=Dictyostelium discoideum GN=tubB PE=1 SV=2	P32256	1		34
+Pleckstrin homology (PH) domain-containing protein OS=Dictyostelium discoideum GN=gxcC PE=4 SV=1	Q54P24	1		23
+Aminoadipic semialdehyde synthase OS=Dictyostelium discoideum GN=aass PE=4 SV=1	Q54P64	1		37
+NAD+ dependent glutamate dehydrogenase OS=Dictyostelium discoideum GN=DDB_0233691 PE=4 SV=2	Q54VI3	1		28
+Glucose-6-phosphate 1-dehydrogenase OS=Dictyostelium discoideum GN=g6pd-1 PE=3 SV=1	Q557D2	1		36
+Annexin A7 OS=Dictyostelium discoideum GN=nxnA PE=1 SV=1	P24639	1		26
+Conditioned medium factor receptor 1 OS=Dictyostelium discoideum GN=cmfB PE=1 SV=1	Q9U641	1		35
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0204126 PE=4 SV=1	Q54U49	1		32
+Cell division cycle protein 48 OS=Dictyostelium discoideum GN=cdcD PE=2 SV=2	P90532	1		23
+"Elongation factor Tu, mitochondrial OS=Dictyostelium discoideum GN=tufm PE=3 SV=2"	Q54HB2	1		28
+DNA damage-binding protein 1 OS=Dictyostelium discoideum GN=repE PE=1 SV=1	B0M0P5	1		27
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0168140 PE=4 SV=1	Q557C7	1		22
+Elongation factor 1-beta OS=Dictyostelium discoideum GN=efa1B PE=1 SV=1	Q9GRF8	1		32
+"Delta-1-pyrroline-5-carboxylate dehydrogenase, mitochondrial OS=Dictyostelium discoideum GN=DDB_G02"	Q54RA2	1		33
+Alpha amylase domain-containing protein OS=Dictyostelium discoideum GN=gtr2 PE=4 SV=1	Q75JH8	1		21
+Clathrin heavy chain OS=Dictyostelium discoideum GN=chcA PE=1 SV=1	P25870	1		23
+Catalase-A OS=Dictyostelium discoideum GN=catA PE=2 SV=2	O77229	1		24
+Putative uncharacterized protein abpF OS=Dictyostelium discoideum GN=abpF PE=4 SV=1	Q54ET6	1		26
+Transketolase OS=Dictyostelium discoideum GN=tkt-1 PE=1 SV=1	Q556J0	1		23
+Talin-B OS=Dictyostelium discoideum GN=talB PE=2 SV=1	Q54K81	1		32
+"Probable arginyl-tRNA synthetase, cytoplasmic OS=Dictyostelium discoideum GN=argS1 PE=3 SV=1"	Q558Z0	1		24
+Heat shock cognate 70 kDa protein 2 OS=Dictyostelium discoideum GN=hspE-1 PE=1 SV=1	Q557E0	1	TRUE	49
+Tubulin alpha chain OS=Dictyostelium discoideum GN=tubA PE=1 SV=1	P32255	1	TRUE	24
+Putative aldehyde dehydrogenase family 7 member A1 homolog OS=Dictyostelium discoideum GN=DDB_G0276	P83401	1		23
+Probable polyketide synthase 16 OS=Dictyostelium discoideum GN=pks16 PE=2 SV=1	Q869W9	1		19
+26S proteasome non-ATPase regulatory subunit 1 OS=Dictyostelium discoideum GN=psmD1 PE=1 SV=1	Q54JM5	1		25
+Bifunctional purine biosynthesis protein purH OS=Dictyostelium discoideum GN=purH PE=1 SV=1	Q86L14	1		31
+Acetylornithine deacetylase OS=Dictyostelium discoideum GN=argE PE=1 SV=2	P54638	1		30
+Alpha/beta hydrolase fold-1 domain-containing protein OS=Dictyostelium discoideum GN=DDB_0252556 PE	Q55EQ3	1		22
+Ubiquitin-like modifier-activating enzyme 1 OS=Dictyostelium discoideum GN=uba1 PE=3 SV=1	Q55C16	1		23
+IfdA (Fragment) OS=Dictyostelium discoideum GN=ifdA PE=1 SV=1	P90529	1		20
+T-complex protein 1 subunit gamma OS=Dictyostelium discoideum GN=cct3 PE=1 SV=1	Q54TH8	1		22
+Amine oxidase (Flavin-containing) OS=Dictyostelium discoideum GN=DDB_0183806 PE=4 SV=1	Q54EW2	1		22
+Puromycin-sensitive aminopeptidase-like protein OS=Dictyostelium discoideum GN=psaB PE=4 SV=1	Q55CY7	1		16
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0219884 PE=4 SV=1	Q54BI8	1	TRUE	21
+"Zinc finger, N-recognin domain-containing protein OS=Dictyostelium discoideum GN=DDB_0215923 PE=4 S"	Q54JV0	1		21
+Acetyl-CoA carboxylase OS=Dictyostelium discoideum GN=accA PE=3 SV=1	Q54J08	1		22
+26S proteasome non-ATPase regulatory subunit 3 OS=Dictyostelium discoideum GN=psmD3 PE=1 SV=1	Q1ZXD3	1		15
+Puromycin-sensitive aminopeptidase-like protein OS=Dictyostelium discoideum GN=psaA PE=4 SV=1	Q55CT4	1		19
+Eukaryotic peptide chain release factor GTP-binding subunit OS=Dictyostelium discoideum GN=erf3 PE=	Q7YZN9	1		11
+Lysyl-tRNA synthetase OS=Dictyostelium discoideum GN=lysS PE=1 SV=1	Q54TY4	1		21
+Phosphoenolpyruvate carboxykinase [ATP] OS=Dictyostelium discoideum GN=pckA PE=1 SV=1	Q75JD5	1		15
+Probable cytoplasmic aconitate hydratase OS=Dictyostelium discoideum GN=aco1 PE=3 SV=1	Q54X73	1		17
+Major vault protein beta OS=Dictyostelium discoideum GN=mvpB PE=1 SV=1	P54659	1	TRUE	26
+RasGTPase-activating protein OS=Dictyostelium discoideum PE=4 SV=1	O15815 (+2)	1		7
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0217525 PE=4 SV=1	Q555H8 (+1)	1		21
+Propionyl-CoA carboxylase OS=Dictyostelium discoideum GN=pccA PE=4 SV=1	Q553S7	1		19
+Adenylyl cyclase-associated protein OS=Dictyostelium discoideum GN=cap PE=1 SV=1	P54654	1		19
+Acyl-CoA oxidase OS=Dictyostelium discoideum GN=DDB_0169464 PE=4 SV=1	Q75JL8	1		22
+Coronin OS=Dictyostelium discoideum GN=corA PE=1 SV=2	P27133	1		17
+Heat shock protein 88 OS=Dictyostelium discoideum GN=hspH PE=1 SV=1	Q6TMK3	1		20
+Phosphoribosylformylglycinamidine synthase OS=Dictyostelium discoideum GN=purL PE=3 SV=1	Q54JC8	1		7
+T-complex protein 1 subunit alpha OS=Dictyostelium discoideum GN=tcp1 PE=2 SV=1	Q55BM4	1		23
+Dipeptidyl-peptidase 3 OS=Dictyostelium discoideum GN=dpp3-1 PE=3 SV=1	Q557H1	1		23
+Inosine-5'-monophosphate dehydrogenase OS=Dictyostelium discoideum GN=impdh PE=2 SV=1	Q54QQ0	1		16
+26S proteasome non-ATPase regulatory subunit 2 OS=Dictyostelium discoideum GN=psmD2 PE=2 SV=1	Q54BC6	1		20
+Major vault protein alpha OS=Dictyostelium discoideum GN=mvpA PE=1 SV=1	P34118	1	TRUE	19
+Probable adenosine deaminase OS=Dictyostelium discoideum GN=ada PE=3 SV=1	Q54KF3	1		19
+"Heat shock 70 kDa protein, mitochondrial OS=Dictyostelium discoideum GN=mhsp70 PE=2 SV=1"	Q8I0H7	1		18
+5-methyltetrahydropteroyltriglutamate--homocysteine methyltransferase OS=Dictyostelium discoideum G	Q54X49	1		9
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0189177 PE=4 SV=1	Q54FB9	1		10
+"Glutamate dehydrogenase, mitochondrial OS=Dictyostelium discoideum GN=gluD PE=1 SV=1"	Q54KB7	1		20
+Phosphoglycerate kinase OS=Dictyostelium discoideum GN=pgkA PE=1 SV=2	Q9GPM4	1		20
+Glycyl-tRNA synthetase OS=Dictyostelium discoideum GN=glyS PE=1 SV=1	Q54PF9	1		17
+Alkyldihydroxyacetonephosphate synthase OS=Dictyostelium discoideum GN=eapA PE=1 SV=1	O96759	1		16
+Adenosylhomocysteinase OS=Dictyostelium discoideum GN=sahA PE=1 SV=2	P10819	1		19
+"N-acetyltransferase, non-catalytic subunit OS=Dictyostelium discoideum GN=DDB_0191837 PE=4 SV=1"	Q54C34	1		19
+Putative glutathione S-transferase alpha-1 OS=Dictyostelium discoideum GN=gsta1 PE=1 SV=1	Q55FF3	1		10
+Discoidin-1 subunit B/C OS=Dictyostelium discoideum GN=dscC-1 PE=1 SV=1	P02887 (+1)	1	TRUE	19
+V-type proton ATPase subunit B OS=Dictyostelium discoideum GN=vatB PE=1 SV=1	Q76NU1	1		14
+AMP-dependent synthetase and ligase domain-containing protein OS=Dictyostelium discoideum GN=DDB_02	Q54WL7	1		16
+Putative acyl-CoA oxidase OS=Dictyostelium discoideum GN=DDB_0216722 PE=4 SV=1	Q55CT6	1		13
+Leukotriene A-4 hydrolase OS=Dictyostelium discoideum GN=lkhA PE=2 SV=2	P52922	1		14
+Fimbrin OS=Dictyostelium discoideum GN=fimA PE=2 SV=2	P54680	1		12
+"Bifunctional protein argC, mitochondrial OS=Dictyostelium discoideum GN=argC PE=3 SV=1"	Q54M18	1		18
+Aldehyde dehydrogenase OS=Dictyostelium discoideum GN=DDB_0231480 PE=3 SV=1	Q551V0 (+1)	1		14
+Calreticulin OS=Dictyostelium discoideum GN=crtA PE=1 SV=3	Q23858	1		13
+"Apoptosis-inducing factor 1, mitochondrial OS=Dictyostelium discoideum GN=aif PE=2 SV=1"	Q9GRX6	1		12
+RuvB-like helicase 2 OS=Dictyostelium discoideum GN=rvb2 PE=3 SV=1	Q54UW5	1		17
+Thimet-like oligopeptidase OS=Dictyostelium discoideum GN=DDB_G0292362 PE=3 SV=1	Q54DD2	1		15
+Enolase A OS=Dictyostelium discoideum GN=enoA PE=3 SV=1	Q54RK5	1		18
+Luminal-binding protein 2 OS=Dictyostelium discoideum GN=bip2 PE=1 SV=1	Q8T869	1		16
+T-complex protein 1 subunit theta OS=Dictyostelium discoideum GN=cct8 PE=3 SV=1	Q552J0	1		14
+"Probable isoleucyl-tRNA synthetase, cytoplasmic OS=Dictyostelium discoideum GN=ileS PE=3 SV=1"	Q54YD4	1		11
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0205823 PE=4 SV=1	Q54WN8	1		9
+"Asparaginyl-tRNA synthetase, cytoplasmic OS=Dictyostelium discoideum GN=asnS1 PE=1 SV=1"	Q554D9	1		10
+"Probable glutamyl-tRNA synthetase, cytoplasmic OS=Dictyostelium discoideum GN=gluS PE=2 SV=1"	Q54KB8	1		14
+S-adenosylmethionine synthetase OS=Dictyostelium discoideum GN=metK PE=1 SV=1	Q54F07	1		14
+AAA ATPase domain-containing protein OS=Dictyostelium discoideum GN=DD8-14 PE=2 SV=1	Q58A41	1		12
+"Probable elongation factor G, mitochondrial OS=Dictyostelium discoideum GN=gfm1 PE=3 SV=1"	Q55E94	1		6
+"ATP synthase subunit beta, mitochondrial OS=Dictyostelium discoideum GN=atp5b PE=1 SV=1"	Q55CS9	1		17
+"TNF receptor-associated protein 1 homolog, mitochondrial OS=Dictyostelium discoideum GN=trap1 PE=2"	Q86L04	1		10
+Probable phenylalanine-4-hydroxylase OS=Dictyostelium discoideum GN=pah PE=3 SV=1	Q54XS1	1		16
+Delta 9 fatty acid desaturase OS=Dictyostelium discoideum GN=DDB_0168056 PE=3 SV=1	Q556T4	1		13
+WD40 repeat-containing protein OS=Dictyostelium discoideum GN=wdr23 PE=4 SV=1	Q54E28	1		11
+Acetyl-CoA hydrolase OS=Dictyostelium discoideum GN=ach1 PE=3 SV=1	Q54K91	1		8
+SNase-like domain-containing protein OS=Dictyostelium discoideum GN=snd1 PE=4 SV=1	Q54WH0	1		12
+Protein disulfide-isomerase 2 OS=Dictyostelium discoideum GN=pdi2 PE=3 SV=1	Q54EN4	1		11
+"Aspartyl-tRNA synthetase, cytoplasmic 1 OS=Dictyostelium discoideum GN=aspS1 PE=3 SV=1"	Q75JQ1	1		11
+Cullin-5 OS=Dictyostelium discoideum GN=culE PE=3 SV=1	Q54XF7	1		15
+V-type proton ATPase catalytic subunit A OS=Dictyostelium discoideum GN=vatA PE=1 SV=2	P54647	1		11
+Serine hydroxymethyltransferase 1 OS=Dictyostelium discoideum GN=shmt1 PE=1 SV=1	Q54Z26	1	TRUE	14
+Type-3 glutamine synthetase OS=Dictyostelium discoideum GN=glnA3 PE=1 SV=1	Q54WR9	1		11
+Glycogen phosphorylase 1 OS=Dictyostelium discoideum GN=glpV PE=1 SV=3	Q00766	1		10
+Pyruvate kinase OS=Dictyostelium discoideum GN=pyk PE=3 SV=1	Q54RF5	1		15
+Propionyl-CoA carboxylase OS=Dictyostelium discoideum GN=pccB PE=4 SV=1	Q8T131	1		11
+4-aminobutyrate aminotransferase OS=Dictyostelium discoideum GN=gabT PE=3 SV=1	Q55FI1	1		14
+"Fumarate hydratase, mitochondrial OS=Dictyostelium discoideum GN=fumH PE=3 SV=1"	Q54VA2	1		9
+Putative acyl-CoA oxidase OS=Dictyostelium discoideum GN=DDB_0188084 PE=4 SV=1	Q54II1	1		13
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0202574 PE=4 SV=1	Q553T0	1		13
+Fatty acyl-CoA synthetase OS=Dictyostelium discoideum GN=fcsA PE=1 SV=1	Q55DR6	1		10
+Rab GDP dissociation inhibitor alpha OS=Dictyostelium discoideum GN=DDB_0232225 PE=4 SV=1	Q55FM7	1		12
+Prolyl endopeptidase OS=Dictyostelium discoideum GN=prep PE=1 SV=1	Q86AS5	1		11
+T-complex protein 1 subunit eta OS=Dictyostelium discoideum GN=cct7 PE=3 SV=1	Q54ER7	1		12
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0189117 PE=4 SV=1	Q54FH4	1		8
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0190082 PE=4 SV=1	Q55EK6	1		10
+Endoplasmin homolog OS=Dictyostelium discoideum GN=grp94 PE=2 SV=2	Q9NKX1	1	TRUE	14
+Bifunctional purine biosynthetic protein purD OS=Dictyostelium discoideum GN=purD PE=3 SV=1	Q54GJ2	1		12
+"Probable methylmalonate-semialdehyde dehydrogenase [acylating], mitochondrial OS=Dictyostelium disc"	Q54I10	1		10
+Putative uncharacterized protein dnajc13 OS=Dictyostelium discoideum GN=dnajc13 PE=4 SV=1	Q54LZ3	1		11
+Malate synthase OS=Dictyostelium discoideum GN=masA PE=2 SV=2	Q8T2K9	1		10
+"ATP synthase subunit alpha, mitochondrial OS=Dictyostelium discoideum GN=atp1 PE=3 SV=1"	Q9XPJ9	1		10
+Putative uncharacterized protein DDB_G0284097 OS=Dictyostelium discoideum GN=DDB_G0284097 PE=1 SV=1	Q54Q48	1		6
+Cystathionine beta-synthase OS=Dictyostelium discoideum GN=cysB PE=2 SV=2	P46794	1		11
+"1,4-alpha-glucan-branching enzyme OS=Dictyostelium discoideum GN=glgB PE=3 SV=1"	Q555Q9	1		9
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0190990 PE=4 SV=1	Q55BV1	1		10
+Probable importin-5 homolog OS=Dictyostelium discoideum GN=DDB_G0291650 PE=3 SV=1	Q54EW3	1		6
+"Seryl-tRNA synthetase, cytoplasmic OS=Dictyostelium discoideum GN=serS PE=1 SV=1"	Q7KWQ2	1		8
+26S protease regulatory subunit 4 homolog OS=Dictyostelium discoideum GN=psmC1 PE=1 SV=1	Q55BV5	1	TRUE	7
+WD repeat-containing protein 2 homolog OS=Dictyostelium discoideum GN=wdpA PE=2 SV=2	P54686	1		12
+Dual specificity protein kinase shkC OS=Dictyostelium discoideum GN=shkC PE=3 SV=1	Q54Y55	1		8
+Aldehyde dehydrogenase OS=Dictyostelium discoideum GN=DDB_0231475 PE=3 SV=1	Q54FY1	1	TRUE	9
+Dihydropyrimidine dehydrogenase [NADP+] OS=Dictyostelium discoideum GN=pyd1 PE=2 SV=1	Q55FT1	1		6
+Vacuolar protein sorting-associated protein 45 OS=Dictyostelium discoideum GN=vps45 PE=1 SV=1	Q54GE3	1		4
+"Probable threonyl-tRNA synthetase 1, cytoplasmic OS=Dictyostelium discoideum GN=thrS1 PE=3 SV=1"	Q54J66	1		10
+CTP synthase OS=Dictyostelium discoideum GN=ctps PE=3 SV=1	Q54V77	1		9
+Nck-associated protein 1 homolog OS=Dictyostelium discoideum GN=napA PE=1 SV=1	Q869Q3	1		9
+Alanyl-tRNA synthetase OS=Dictyostelium discoideum GN=alaS PE=2 SV=1	Q54Y20	1		5
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0188248 PE=4 SV=1	Q54I12	1		6
+Dynamin-like protein A OS=Dictyostelium discoideum GN=dlpA PE=2 SV=1	Q55F94	1		8
+UTP--glucose-1-phosphate uridylyltransferase 1 OS=Dictyostelium discoideum GN=uppA PE=2 SV=2	P08800	1		8
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0204712 PE=4 SV=1	Q54UX5	1		9
+"Leucyl-tRNA synthetase, cytoplasmic OS=Dictyostelium discoideum GN=leuS PE=3 SV=1"	Q54N83	1		8
+Probable ATP-dependent RNA helicase ddx3 OS=Dictyostelium discoideum GN=ddx3 PE=3 SV=1	Q54QS3	1		6
+Acyl-CoA oxidase OS=Dictyostelium discoideum GN=DDB_0169270 PE=4 SV=1	Q8MMS1	1		9
+Protein STIP1 homolog OS=Dictyostelium discoideum GN=sti1 PE=3 SV=1	Q54DA8	1		8
+Putative ATP citrate synthase OS=Dictyostelium discoideum GN=DDB_0205386 PE=1 SV=1	Q54YA2	1		8
+GMP synthase [glutamine-hydrolyzing] OS=Dictyostelium discoideum GN=guaA PE=1 SV=2	P32073	1		10
+Acylaminoacyl-peptidase OS=Dictyostelium discoideum GN=apeh PE=4 SV=1	Q54D66	1		8
+Formimidoyltransferase-cyclodeaminase OS=Dictyostelium discoideum GN=ftcd PE=3 SV=1	Q54JL3	1		11
+"Probable glycerol-3-phosphate dehydrogenase, mitochondrial OS=Dictyostelium discoideum GN=DDB_G0283"	Q54QC1	1		7
+Kynurenine 3-monooxygenase OS=Dictyostelium discoideum GN=kmo PE=3 SV=1	Q54RE8	1		8
+Cortexillin-2 OS=Dictyostelium discoideum GN=ctxB PE=1 SV=1	Q550R2	1	TRUE	7
+"6-phosphogluconate dehydrogenase, decarboxylating OS=Dictyostelium discoideum GN=gnd PE=3 SV=1"	Q8TA03	1		11
+Putative D-lactate dehydrogenase OS=Dictyostelium discoideum GN=ldhA PE=1 SV=1	Q54UF7	1		6
+Xaa-Pro dipeptidase OS=Dictyostelium discoideum GN=pepd PE=3 SV=1	Q55E60	1		8
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0204284 PE=4 SV=2	Q54T94	1		6
+Coatomer subunit alpha OS=Dictyostelium discoideum GN=copa PE=3 SV=1	Q55FR9	1		7
+Formin-B OS=Dictyostelium discoideum GN=forB PE=1 SV=1	Q54SP2	1		4
+Vacuolar sorting protein 35 OS=Dictyostelium discoideum GN=vps35 PE=3 SV=1	Q54C24	1		6
+Putative amino oxidase OS=Dictyostelium discoideum GN=DDB_0231714 PE=4 SV=1	Q54HR9	1		7
+"Methylcrotonoyl-CoA carboxylase subunit alpha, mitochondrial OS=Dictyostelium discoideum GN=mccA PE"	Q54KE6	1		5
+"Probable saccharopine dehydrogenase [NADP+, L-glutamate-forming] OS=Dictyostelium discoideum GN=sdh"	Q54NG9	1		4
+Oxoglutarate dehydrogenase (Succinyl-transferring) OS=Dictyostelium discoideum GN=odhA PE=4 SV=1	Q54VG0	1		9
+Phenylalanyl-tRNA synthetase beta chain OS=Dictyostelium discoideum GN=pheSB PE=3 SV=2	Q550D2	1		8
+"Phosphoenolpyruvate carboxykinase [GTP], mitochondrial OS=Dictyostelium discoideum GN=pck2 PE=3 SV="	Q869Z4	1		9
+"Probable valyl-tRNA synthetase, cytoplasmic OS=Dictyostelium discoideum GN=valS1 PE=3 SV=1"	Q86KU2	1		6
+HEAT repeat-containing protein 7A homolog OS=Dictyostelium discoideum GN=heatr7a PE=4 SV=1	Q54F23	1		3
+Signal recognition particle subunit SRP68 OS=Dictyostelium discoideum GN=srp68 PE=3 SV=1	Q1ZXE8	1		4
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0168417 PE=4 SV=1	Q86JG3	1		8
+Probable histidine ammonia-lyase OS=Dictyostelium discoideum GN=hal PE=3 SV=1	Q54JI7	1		8
+Vacuolin-A OS=Dictyostelium discoideum GN=vacA PE=1 SV=1	O15706	1	TRUE	11
+"Probable methionyl-tRNA synthetase, cytoplasmic OS=Dictyostelium discoideum GN=metS PE=3 SV=1"	Q54X95	1		6
+Cortexillin-1 OS=Dictyostelium discoideum GN=ctxA PE=1 SV=1	Q54HG2	1	TRUE	9
+"Probable succinyl-CoA:3-ketoacid-coenzyme A transferase, mitochondrial OS=Dictyostelium discoideum"	Q54JD9	1		6
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0187592 PE=4 SV=1	Q54JZ3	1		9
+"Probable aconitate hydratase, mitochondrial OS=Dictyostelium discoideum GN=aco2 PE=3 SV=1"	Q54XS2	1		7
+NADPH oxidoreductase B OS=Dictyostelium discoideum GN=redB PE=2 SV=1	Q55CT1	1		6
+"Methylcrotonoyl-CoA carboxylase beta chain, mitochondrial OS=Dictyostelium discoideum GN=mccb PE=3"	Q8T2J9	1		8
+AP-1 complex subunit beta OS=Dictyostelium discoideum GN=ap1b1 PE=3 SV=1	Q54X82	1		4
+Putative arginine deiminase OS=Dictyostelium discoideum GN=DDB_0232205 PE=4 SV=1	Q75JW5	1		6
+Coatomer subunit beta OS=Dictyostelium discoideum GN=copb PE=2 SV=2	Q23924	1		4
+Argonaut-like protein OS=Dictyostelium discoideum GN=agnB PE=4 SV=1	Q54G64	1		3
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0204927 PE=4 SV=1	Q54S30	1		4
+Mitochondrial-processing peptidase subunit alpha OS=Dictyostelium discoideum GN=pmpca PE=1 SV=1	Q54F93	1		7
+Probable flavin-containing monoamine oxidase A OS=Dictyostelium discoideum GN=maoA PE=3 SV=1	Q54IT3	1		6
+Sphingosine-1-phosphate lyase OS=Dictyostelium discoideum GN=sglA PE=2 SV=1	Q54RV9	1		5
+Aldehyde dehydrogenase OS=Dictyostelium discoideum GN=DDB_0231474 PE=3 SV=1	Q54FY2	1	TRUE	7
+Glucose-6-phosphate isomerase OS=Dictyostelium discoideum GN=gpi PE=3 SV=1	Q5V9E9	1		8
+Aldehyde dehydrogenase family 3 comG OS=Dictyostelium discoideum GN=comG PE=3 SV=1	Q54DG1	1		4
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0219564 PE=1 SV=1	Q54G31	1	TRUE	7
+AP-1 complex subunit gamma OS=Dictyostelium discoideum GN=ap1g1 PE=2 SV=1	Q8I8U2	1		6
+Uridine 5'-monophosphate synthase OS=Dictyostelium discoideum GN=pyr56 PE=1 SV=2	P09556	1		8
+"60 kDa heat shock protein, mitochondrial OS=Dictyostelium discoideum GN=hspA PE=2 SV=1"	Q54J97	1		3
+"Glycine dehydrogenase [decarboxylating], mitochondrial OS=Dictyostelium discoideum GN=gcvP PE=3 SV="	Q54KM7	1		4
+Glutamine-fructose-6-phosphate transaminase (Isomerizing) OS=Dictyostelium discoideum GN=DDB_018703	Q54LK1	1		7
+Discoidin-2 OS=Dictyostelium discoideum GN=dscE PE=1 SV=1	P42530	1	TRUE	5
+Hisactophilin-1 OS=Dictyostelium discoideum GN=hatA PE=1 SV=3	P13231	1		5
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0216653 PE=4 SV=2	Q55E22	1		9
+Probable glutaminyl-tRNA synthetase OS=Dictyostelium discoideum GN=glnS PE=2 SV=2	P14325	1		5
+Acyl-CoA oxidase OS=Dictyostelium discoideum GN=acoA PE=4 SV=1	Q54RB0	1		3
+Stress-activated protein kinase alpha OS=Dictyostelium discoideum GN=spkA-1 PE=1 SV=1	Q86AT8	1		2
+Probable ATP-dependent RNA helicase ddx1 OS=Dictyostelium discoideum GN=ddx1 PE=3 SV=1	Q55CP6	1		7
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0187205 PE=4 SV=1	Q54L23	1		4
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0205702 PE=4 SV=1	Q54X02	1		7
+FACT complex subunit SPT16 OS=Dictyostelium discoideum GN=spt16 PE=3 SV=1	Q54S43	1		2
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0189571 PE=4 SV=1	Q55G48	1		3
+Dihydrolipoyl dehydrogenase OS=Dictyostelium discoideum GN=lpd PE=3 SV=1	Q54EW8	1		8
+Formate-dihydrofolate ligase OS=Dictyostelium discoideum GN=fthS PE=4 SV=1	Q54G53	1		6
+Glucosamine-6-phosphate isomerase OS=Dictyostelium discoideum GN=nagB1 PE=4 SV=1	Q54M58	1		3
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0185931 PE=4 SV=1	Q54PW3	1		6
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0205566 PE=4 SV=1	Q54U01	1		6
+UTP--glucose-1-phosphate uridylyltransferase 2 OS=Dictyostelium discoideum GN=ugpB PE=2 SV=1	Q54YZ0	1		8
+"Citrate synthase, mitochondrial OS=Dictyostelium discoideum GN=cs PE=3 SV=1"	Q553V1	1		7
+"Citrate synthase, peroxisomal OS=Dictyostelium discoideum GN=cshA PE=2 SV=1"	Q8MQU6	1	TRUE	8
+"1-phosphatidylinositol-4,5-bisphosphate phosphodiesterase OS=Dictyostelium discoideum GN=plc PE=2 S"	Q02158	1		4
+Carmil OS=Dictyostelium discoideum GN=carmil PE=4 SV=1	Q95VZ3	1		6
+Peroxisomal acyl-coenzyme A oxidase 1 OS=Dictyostelium discoideum GN=acox1 PE=3 SV=1	Q54GQ6	1		2
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0189883 PE=4 SV=1	Q55F70	1		4
+Vegetative stage specific V4-7 (Fragment) OS=Dictyostelium discoideum PE=2 SV=1	Q23857 (+1)	1		4
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0205795 PE=4 SV=1	Q54WR3	1		8
+Cycloartenol synthase OS=Dictyostelium discoideum GN=cas1 PE=1 SV=1	Q55D85	1		5
+26S proteasome ATPase 3 subunit OS=Dictyostelium discoideum GN=psmC3 PE=3 SV=1	Q54PN7	1	TRUE	4
+COP9 signalosome complex subunit 1 OS=Dictyostelium discoideum GN=csn1 PE=1 SV=1	Q54QX3	1		6
+Aldehyde dehydrogenase OS=Dictyostelium discoideum GN=DDB_0231503 PE=4 SV=1	Q55CJ9	1		5
+Cytosol aminopeptidase OS=Dictyostelium discoideum GN=lap PE=3 SV=1	Q5V9F0	1		3
+Dual specificity protein kinase shkA OS=Dictyostelium discoideum GN=shkA PE=2 SV=1	Q54RB7	1		4
+NADH-ubiquinone oxidoreductase 75 kDa subunit OS=Dictyostelium discoideum GN=nad11 PE=3 SV=1	Q34312	1		4
+Phosphoglucomutase-1 OS=Dictyostelium discoideum GN=pgmA PE=2 SV=1	Q23919	1		3
+Aldehyde dehydrogenase OS=Dictyostelium discoideum GN=DDB_0231476 PE=3 SV=1	Q54IU0	1		5
+Eukaryotic translation initiation factor 3 subunit B OS=Dictyostelium discoideum GN=eif3b PE=3 SV=2	Q54QW1	1		5
+Protein transport protein SEC23 OS=Dictyostelium discoideum GN=sec23 PE=3 SV=2	Q54T59	1		5
+Probable phosphoglucomutase-2 OS=Dictyostelium discoideum GN=pgmB PE=3 SV=1	Q54UQ2	1		6
+RNaseL inhibitor-like protein OS=Dictyostelium discoideum GN=abcE1 PE=3 SV=1	Q8T8P2	1		7
+Probable cytochrome P450 524A1 OS=Dictyostelium discoideum GN=cyp524a1 PE=3 SV=1	Q55EK2	1		5
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0188843 PE=4 SV=1	Q54G77	1		4
+Calcineurin subunit A OS=Dictyostelium discoideum GN=canA PE=1 SV=1	Q7YSW8	1		1
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0218292 PE=4 SV=1	Q54U95	1		4
+"Probable alanine aminotransferase, mitochondrial OS=Dictyostelium discoideum GN=gpt PE=3 SV=1"	Q54MJ7	1		4
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0201696 PE=4 SV=1	Q55E77	1		5
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0231540 PE=4 SV=1	Q54P88	1		5
+SET domain-containing protein OS=Dictyostelium discoideum GN=cnrI PE=4 SV=1	Q55D68	1		2
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0190795 PE=4 SV=1	Q55CE9	1		1
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0168777 PE=4 SV=1	Q75JS7	1		3
+Cytosolic purine 5'-nucleotidase OS=Dictyostelium discoideum GN=nt5c2 PE=3 SV=1	Q54XC1	1		5
+Probable lanosterol 14-alpha demethylase OS=Dictyostelium discoideum GN=cyp51 PE=3 SV=1	Q1ZXH9	1		5
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0186526 PE=4 SV=1	Q54N59	1		6
+Myosin ID heavy chain OS=Dictyostelium discoideum GN=myoD PE=1 SV=2	P34109	1	TRUE	2
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0189295 PE=4 SV=1	Q54F09	1		5
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0188190 PE=1 SV=1	Q54I73	1		3
+D-3-phosphoglycerate dehydrogenase OS=Dictyostelium discoideum GN=serA PE=1 SV=1	Q54UH8	1		5
+Protein pirA OS=Dictyostelium discoideum GN=pirA PE=1 SV=1	Q6UK63	1		5
+"Cysteinyl-tRNA synthetase, cytoplasmic OS=Dictyostelium discoideum GN=cysS PE=3 SV=1"	Q54KR1	1		4
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0186514 PE=4 SV=1	Q54N71	1		1
+Citrate synthase OS=Dictyostelium discoideum GN=gltA PE=3 SV=1	Q86AV6	1	TRUE	5
+Serine palmitoyltransferase 2 OS=Dictyostelium discoideum GN=sptB PE=3 SV=1	Q54EX5	1		1
+Cathepsin D OS=Dictyostelium discoideum GN=ctsD PE=1 SV=1	O76856	1		4
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0168980 PE=4 SV=1	Q86B07	1		4
+Probable 4-coumarate--CoA ligase 1 OS=Dictyostelium discoideum GN=4cl1 PE=3 SV=1	Q54P77 (+1)	1		4
+Adenylosuccinate lyase OS=Dictyostelium discoideum GN=purB PE=3 SV=1	Q54J34	1		3
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0191714 PE=4 SV=1	Q54CF7	1		4
+Cullin-associated NEDD8-dissociated protein 1 OS=Dictyostelium discoideum GN=cand1 PE=3 SV=1	Q86KD1	1		2
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0234030 PE=4 SV=1	B0G193 (+1)	1	TRUE	2
+"Sulfide:quinone oxidoreductase, mitochondrial OS=Dictyostelium discoideum GN=sqrdl PE=3 SV=1"	Q54DK1	1		4
+cAMP-regulated M3R protein OS=Dictyostelium discoideum GN=prtB PE=2 SV=4	P11872	1		3
+AAA ATPase domain-containing protein OS=Dictyostelium discoideum GN=DDB_0231600 PE=3 SV=1	Q54I27	1		5
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0206474 PE=4 SV=2	Q54VL9	1		5
+Glutathione synthetase OS=Dictyostelium discoideum GN=gshB PE=3 SV=1	Q54E83	1		4
+Coatomer subunit beta' OS=Dictyostelium discoideum GN=copb2 PE=3 SV=1	Q54YD8	1		3
+"Histidyl-tRNA synthetase, cytoplasmic OS=Dictyostelium discoideum GN=hisS PE=3 SV=1"	Q86AS6	1		3
+Calnexin OS=Dictyostelium discoideum GN=cnxA PE=3 SV=1	Q55BA8 (+1)	1		5
+AMP deaminase OS=Dictyostelium discoideum GN=amdA PE=1 SV=1	Q54DD0	1		3
+Acyl-CoA oxidase OS=Dictyostelium discoideum GN=DDB_0231393 PE=4 SV=1	Q55BH8	1		1
+ABC transporter-related protein OS=Dictyostelium discoideum GN=abcF1 PE=3 SV=1	Q8T6B8	1		6
+Neutral alpha-glucosidase AB OS=Dictyostelium discoideum GN=modA PE=3 SV=1	Q94502	1		5
+Probable ATP-citrate synthase OS=Dictyostelium discoideum GN=acly PE=1 SV=1	Q54YA0	1		5
+Glutathione reductase OS=Dictyostelium discoideum GN=gsr PE=3 SV=2	Q8T137	1		4
+Probable ornithine decarboxylase OS=Dictyostelium discoideum GN=odc PE=3 SV=1	Q54UF3	1		3
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0167593 PE=4 SV=1	Q8T294	1		2
+Ras-related GTP-binding protein OS=Dictyostelium discoideum GN=ragC PE=4 SV=1	Q54PK6	1		5
+Argonaut-like protein OS=Dictyostelium discoideum GN=agnA PE=4 SV=1	Q7KWS3	1		3
+Probable urocanate hydratase OS=Dictyostelium discoideum GN=uroc1 PE=3 SV=2	Q86AX3	1		2
+Diphosphomevalonate decarboxylase OS=Dictyostelium discoideum GN=mvd PE=3 SV=1	Q54YQ9	1		1
+Phosphatidylinositide phosphatase SAC1 OS=Dictyostelium discoideum GN=sac1 PE=3 SV=1	Q55AW9	1		3
+T-complex protein 1 subunit epsilon OS=Dictyostelium discoideum GN=cct5 PE=3 SV=1	Q54TD3	1		2
+Acetyl-CoA C-acyltransferase OS=Dictyostelium discoideum GN=DDB_0167887 PE=3 SV=1	Q86IY4	1		3
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0218901 PE=4 SV=1	Q54KR6	1		3
+Tetratricopeptide-like helical domain-containing protein (TPR) OS=Dictyostelium discoideum GN=DG109	Q54HV0	1		4
+AP-3 complex subunit beta OS=Dictyostelium discoideum GN=ap3b-1 PE=3 SV=1	Q556J8	1		3
+60S ribosomal protein L3 OS=Dictyostelium discoideum GN=rpl3 PE=3 SV=2	P34113	1		4
+AP-2 complex subunit alpha-2 OS=Dictyostelium discoideum GN=ap2a1-1 PE=3 SV=1	Q86KI1	1		3
+Coatomer subunit delta OS=Dictyostelium discoideum GN=copd PE=3 SV=1	Q55EZ6	1		2
+Lysosomal alpha-mannosidase OS=Dictyostelium discoideum GN=manA PE=1 SV=2	P34098	1		4
+UPF0652 protein OS=Dictyostelium discoideum GN=DDB_G0293552 PE=3 SV=1	Q54BM8	1		3
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0216913 PE=4 SV=1	Q55AN3 (+1)	1		3
+Luminal-binding protein 1 OS=Dictyostelium discoideum GN=bip1-1 PE=3 SV=1	Q556U6	1		2
+Putative alpha-amylase OS=Dictyostelium discoideum GN=amyA PE=4 SV=1	Q54TS5	1		4
+Pantothenate kinase OS=Dictyostelium discoideum GN=DDB_0231513 PE=4 SV=1	Q54G51	1		2
+Amidophosphoribosyltransferase OS=Dictyostelium discoideum GN=purF PE=3 SV=1	Q86A85	1		4
+Serine/threonine-protein kinase 4 homolog B OS=Dictyostelium discoideum GN=krsB PE=3 SV=1	Q55FS2	1		5
+Cullin-2 OS=Dictyostelium discoideum GN=culB PE=2 SV=1	Q9XZJ3	1		5
+NADPH oxidoreductase A OS=Dictyostelium discoideum GN=redA PE=2 SV=1	Q54B10	1		4
+PH domain-containing protein DDB_G0274775 OS=Dictyostelium discoideum GN=DDB_G0274775 PE=4 SV=1	Q86IV4	1		4
+Dihydropyrimidinase OS=Dictyostelium discoideum GN=pyd2 PE=1 SV=1	Q55DL0	1		4
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0169405 PE=4 SV=2	Q86AD3	1		4
+Ubiquitin carboxyl-terminal hydrolase A OS=Dictyostelium discoideum GN=ubpA PE=2 SV=2	P54201	1		3
+26S protease regulatory subunit 7 OS=Dictyostelium discoideum GN=psmC2 PE=1 SV=1	Q86JA1	1	TRUE	2
+Aspartyl aminopeptidase OS=Dictyostelium discoideum GN=dnpep PE=3 SV=1	Q54M70	1		3
+"Succinate dehydrogenase [ubiquinone] flavoprotein subunit, mitochondrial OS=Dictyostelium discoideu"	Q9U3X4	1		4
+Type A von Willebrand factor (VWFA) domain-containing protein OS=Dictyostelium discoideum GN=DDB_02	Q54SU8	1		2
+NADP-dependent malic enzyme OS=Dictyostelium discoideum GN=malA PE=2 SV=1	Q6TU48	1		3
+Probable 2-hydroxyacyl-CoA lyase 1 OS=Dictyostelium discoideum GN=hacl1 PE=3 SV=1	Q54DA9	1		2
+Putative transport protein OS=Dictyostelium discoideum GN=sec24l PE=4 SV=2	Q54Z72 (+1)	1		3
+Guanine deaminase OS=Dictyostelium discoideum GN=guaD PE=3 SV=1	Q86AW9	1		3
+Serine hydroxymethyltransferase 2 OS=Dictyostelium discoideum GN=shmt2 PE=3 SV=1	Q54EW1	1	TRUE	4
+6-phosphofructokinase OS=Dictyostelium discoideum GN=pfkA PE=2 SV=2	P90521	1		3
+Insulin-degrading enzyme homolog OS=Dictyostelium discoideum GN=DDB_G0287851 PE=3 SV=1	Q54JQ2	1		2
+Protein transport protein SEC31 OS=Dictyostelium discoideum GN=sec31 PE=3 SV=1	Q55CT5	1		3
+Dolichyl-diphosphooligosaccharide--protein glycosyltransferase subunit 1 OS=Dictyostelium discoideu	Q54C27	1		2
+AP-3 complex subunit delta OS=Dictyostelium discoideum GN=ap3d1 PE=3 SV=1	Q54WN0	1		2
+Vacuolin-B OS=Dictyostelium discoideum GN=vacB PE=1 SV=1	Q54WZ2	1	TRUE	5
+Xaa-Pro aminopeptidase 1 OS=Dictyostelium discoideum GN=xpnpep1 PE=3 SV=1	Q54G06	1		1
+Heat shock protein Ddj1 OS=Dictyostelium discoideum GN=Ddj1 PE=1 SV=1	O96455 (+1)	1		3
+Thiamine pyrophosphate-binding enzyme family protein OS=Dictyostelium discoideum GN=ilvB PE=3 SV=1	B0G117	1		2
+"Aspartyl-tRNA synthetase, mitochondrial OS=Dictyostelium discoideum GN=maspS PE=3 SV=1"	Q55C99	1		2
+Glutamine-dependent NAD(+) synthetase OS=Dictyostelium discoideum GN=nadsyn1 PE=3 SV=1	Q54ML1	1		2
+"Homogentisate 1,2-dioxygenase OS=Dictyostelium discoideum GN=hgd PE=2 SV=1"	Q54QI4	1		3
+Tyrosine aminotransferase OS=Dictyostelium discoideum GN=tat PE=3 SV=1	Q54K95	1		2
+Methylenetetrahydrofolate reductase OS=Dictyostelium discoideum GN=DDB_0230137 PE=3 SV=1	Q54X84	1		1
+Myosin-J heavy chain OS=Dictyostelium discoideum GN=myoJ PE=4 SV=2	P54697	1		1
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0167855 PE=4 SV=1	Q86J04	1		2
+GPN-loop GTPase 1 homolog OS=Dictyostelium discoideum GN=xab1 PE=3 SV=1	Q54C25	1		3
+GAPA OS=Dictyostelium discoideum GN=gapA PE=4 SV=1	O00899	1		3
+Similar to Thermotoga maritima. Threonine dehydratase catabolic OS=Dictyostelium discoideum GN=DDB_	Q86AP7	1		3
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0167441 PE=4 SV=1	Q869X1	1		2
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0206311 PE=4 SV=1	Q54W90	1		2
+Putative calcium up-regulated protein H OS=Dictyostelium discoideum GN=cupH PE=3 SV=1	Q54FW5 (+1)	1	TRUE	2
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0189736 PE=4 SV=1	Q55FM2	1		1
+Ubiquitin carrier protein OS=Dictyostelium discoideum GN=DDB_0188059 PE=3 SV=1	Q54IK3	1		2
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0167708 PE=4 SV=1	Q86HP1	1		1
+AP-1 complex subunit mu OS=Dictyostelium discoideum GN=apm1 PE=1 SV=1	Q54HS9	1		4
+Acetyl-coenzyme A synthetase OS=Dictyostelium discoideum GN=acsA PE=3 SV=1	Q54Z60	1		4
+Nicotinate phosphoribosyltransferase OS=Dictyostelium discoideum GN=naprt PE=2 SV=1	Q55G10	1		4
+Vesicle-fusing ATPase OS=Dictyostelium discoideum GN=nsfA PE=1 SV=1	Q75JI3	1		3
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0216422 PE=4 SV=1	Q8T2H8	1		3
+Galactokinase OS=Dictyostelium discoideum GN=galK PE=3 SV=1	Q54DN6	1		3
+Acyl-CoA oxidase OS=Dictyostelium discoideum GN=DDB_0234144 PE=4 SV=2	Q54LF1	1		3
+Protein transport protein SEC24 OS=Dictyostelium discoideum GN=sec24 PE=3 SV=1	Q54U61	1		3
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0203550 PE=4 SV=1	Q552L7	1		2
+Actin-related protein 3 OS=Dictyostelium discoideum GN=arpC PE=1 SV=1	P42528	1		3
+Leucine-rich repeat-containing protein (LRR) OS=Dictyostelium discoideum GN=DDB_0218778 PE=4 SV=1	Q54MF0	1		2
+Putative uncharacterized protein DD3-3 OS=Dictyostelium discoideum GN=DD3-3 PE=2 SV=1	Q58A42	1		2
+26S proteasome non-ATPase regulatory subunit 12 OS=Dictyostelium discoideum GN=psmD12 PE=2 SV=1	Q54UJ0	1		2
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0186637 PE=4 SV=1	Q54MU8	1		1
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0185382 PE=3 SV=1	Q54RH6	1		2
+Alpha-glucosidase OS=Dictyostelium discoideum GN=gaa PE=4 SV=1	Q55D50	1		3
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0184335 PE=4 SV=1	Q54DD1	1		2
+Putative calpain-like cysteine protease A OS=Dictyostelium discoideum GN=cplA PE=1 SV=1	Q8MUF9	1		2
+Poly(ADP-ribosyl)transferase OS=Dictyostelium discoideum GN=adprt1A PE=4 SV=1	Q54XI2 (+1)	1		1
+Mannose-1-phosphate guanyltransferase alpha OS=Dictyostelium discoideum GN=gmppA PE=2 SV=1	Q86HG0	1		2
+Probable ornithine aminotransferase OS=Dictyostelium discoideum GN=oatA PE=3 SV=1	Q54JP5	1		2
+"Dynein heavy chain, cytoplasmic OS=Dictyostelium discoideum GN=dhcA PE=1 SV=2"	P34036	1		2
+Probable asparagine synthetase [glutamine-hydrolyzing] OS=Dictyostelium discoideum GN=asns PE=1 SV=	Q54MB4	1		2
+Prolyl-tRNA synthetase OS=Dictyostelium discoideum GN=proS PE=3 SV=1	Q54Q07	1		3
+UV excision repair protein RAD23 homolog OS=Dictyostelium discoideum GN=rcbA PE=1 SV=1	Q54LV1	1		2
+PDZ domain-containing protein OS=Dictyostelium discoideum GN=sort1 PE=4 SV=1	Q54GL5	1		3
+Ubiquitin carboxyl-terminal hydrolase OS=Dictyostelium discoideum GN=usp14 PE=3 SV=1	Q55BC4	1		1
+Dolichyl-diphosphooligosaccharide--protein glycosyltransferase subunit STT3 OS=Dictyostelium discoi	Q54NM9	1		1
+26S protease regulatory subunit 6B homolog OS=Dictyostelium discoideum GN=psmC4 PE=2 SV=1	P34123	1	TRUE	1
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0205201 PE=4 SV=1	Q54VD2	1		1
+Coatomer subunit gamma OS=Dictyostelium discoideum GN=copG PE=1 SV=1	Q54HL0	1		1
+Serine/threonine-protein phosphatase 2A regulatory subunit pppA OS=Dictyostelium discoideum GN=pppA	Q54QR9	1		1
+Sec1-like family protein OS=Dictyostelium discoideum GN=vps33 PE=4 SV=1	Q54F53	1		1
+Fatty acyl-CoA synthetase OS=Dictyostelium discoideum GN=fcsB PE=4 SV=1	Q1ZXQ4	1		3
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0187875 PE=4 SV=1	Q54J53	1		3
+Inositol-3-phosphate synthase OS=Dictyostelium discoideum GN=ino1 PE=3 SV=1	Q54N49	1		3
+Probable allantoinase 1 OS=Dictyostelium discoideum GN=allB1 PE=3 SV=1	Q54SV3	1		3
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0218357 PE=4 SV=1	Q54T11	1		3
+Serine palmitoyltransferase 1 OS=Dictyostelium discoideum GN=sptA PE=3 SV=1	Q55FL5	1		3
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0217938 PE=4 SV=1	Q86K67	1		3
+Sulfate adenylyltransferase OS=Dictyostelium discoideum GN=DDB_0230064 PE=1 SV=1	Q54F74	1		2
+"Acyl-CoA synthetase short-chain family member B, mitochondrial OS=Dictyostelium discoideum GN=aslB"	Q554Z5	1		2
+Copine-B OS=Dictyostelium discoideum GN=cpnB-1 PE=2 SV=1	Q86K21	1		2
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0205874 PE=4 SV=1	Q54W38	1		2
+Putative DEAD/DEAH box helicase OS=Dictyostelium discoideum GN=DDB_0189869 PE=1 SV=1	Q55F84	1		2
+Flavohemoprotein B OS=Dictyostelium discoideum GN=fhbB PE=1 SV=1	Q54D73	1		2
+Putative 5'-nucleotidase OS=Dictyostelium discoideum GN=DDB_0230204 PE=4 SV=1	Q54JY6	1		2
+Eukaryotic translation initiation factor 3 subunit E OS=Dictyostelium discoideum GN=eif3e PE=3 SV=1	Q54CC5	1		2
+Dolichyl-diphosphooligosaccharide--protein glycosyltransferase subunit swp1 OS=Dictyostelium discoi	Q54HG9	1		2
+DnaJ homolog subfamily C member 7 homolog OS=Dictyostelium discoideum GN=dnajc7 PE=1 SV=1	Q54IP0	1		2
+Peroxisomal multifunctional enzyme A OS=Dictyostelium discoideum GN=mfeA PE=2 SV=1	Q9NKW1	1		2
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0191011 PE=4 SV=1	Q55BT0	1		2
+Polyphosphate kinase OS=Dictyostelium discoideum GN=ppkA PE=1 SV=1	Q54BM7	1		2
+NEDD8-activating enzyme E1 regulatory subunit OS=Dictyostelium discoideum GN=nae1 PE=3 SV=1	Q54JM3	1		2
+Aldehyde dehydrogenase OS=Dictyostelium discoideum GN=hydA PE=3 SV=1	Q54FY3	1	TRUE	5
+Darlin OS=Dictyostelium discoideum GN=darA PE=4 SV=1	O76187	1		1
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0192196 PE=4 SV=1	Q54B43	1		1
+Probable serine/threonine-protein kinase DDB_G0277989 OS=Dictyostelium discoideum GN=DDB_G0277989 P	Q54YZ5	1		2
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0185564 PE=4 SV=1	Q54QX1	1		2
+Probable nucleosome assembly protein OS=Dictyostelium discoideum GN=nap1 PE=2 SV=1	Q55ED1	1		2
+Nuclear protein localization protein 4 homolog OS=Dictyostelium discoideum GN=nploc4 PE=3 SV=1	Q54GD3	1		1
+Eukaryotic translation initiation factor 3 subunit A OS=Dictyostelium discoideum GN=eif3a PE=3 SV=1	Q86B20	1		3
+Cullin-3 OS=Dictyostelium discoideum GN=culC PE=3 SV=1	Q54NZ5	1		1
+Alpha-mannosidase G OS=Dictyostelium discoideum GN=manG PE=3 SV=1	Q54K67	1		1
+Myosin heavy chain kinase A OS=Dictyostelium discoideum GN=mhkA PE=1 SV=2	P42527	1		1
+Oxysterol-binding protein 7 OS=Dictyostelium discoideum GN=osbG PE=3 SV=1	Q54RM1	1		1
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0217899 PE=4 SV=1	Q550J5 (+1)	1		1
+Protovillin OS=Dictyostelium discoideum GN=vilB PE=1 SV=1	P36418	1		2
+V-type proton ATPase subunit C OS=Dictyostelium discoideum GN=vatC PE=2 SV=1	P54648	1		2
+"Probable isoleucyl-tRNA synthetase, mitochondrial OS=Dictyostelium discoideum GN=mileS PE=3 SV=1"	Q54CE4	1		2
+Strumpellin homolog OS=Dictyostelium discoideum GN=DDB_G0288569 PE=3 SV=1	Q54IR8	1		2
+Putative pantetheine-phosphate adenylyltransferase OS=Dictyostelium discoideum GN=DDB_0231518 PE=4	Q54IX0	1		2
+Heat shock 70-related protein 5 OS=Dictyostelium discoideum GN=DDB_G0285709 PE=3 SV=1	Q54MR6	1		2
+rRNA methyltransferase 3 homolog OS=Dictyostelium discoideum GN=fsjC PE=3 SV=1	Q54NX0	1		2
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0204271 PE=3 SV=1	Q54TA6	1	TRUE	3
+ATP-dependent RNA helicase ddx19 OS=Dictyostelium discoideum GN=helC PE=2 SV=1	Q54TF8	1		2
+"Electron transfer flavoprotein-ubiquinone oxidoreductase, mitochondrial OS=Dictyostelium discoideum"	Q54XM6	1		2
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0205378 PE=4 SV=1	Q54YA9	1		2
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0217928 PE=4 SV=1	Q550C8	1		2
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0202949 PE=4 SV=1	Q551A9	1		2
+Group IV decarboxylase OS=Dictyostelium discoideum GN=ddcB PE=1 SV=1	Q75JL7	1		2
+"Dihydrolipoyllysine-residue succinyltransferase component of 2-oxoglutarate dehydrogenase complex,"	Q869Y7	1		2
+Autophagy-related protein 7 OS=Dictyostelium discoideum GN=atg7 PE=3 SV=1	Q86CR9	1		2
+Hydroxymethylglutaryl-CoA synthase B OS=Dictyostelium discoideum GN=hgsB PE=3 SV=1	Q86HL5	1		2
+Oxysterol-binding protein 6 OS=Dictyostelium discoideum GN=osbF PE=3 SV=1	Q86HV4	1		2
+ABC transporter F family member 2 OS=Dictyostelium discoideum GN=abcF2 PE=3 SV=1	Q8T6B7	1		2
+Squalene monooxygenase OS=Dictyostelium discoideum GN=sqle PE=4 SV=1	Q54BK7	1		2
+"Probable malate dehydrogenase 2, mitochondrial OS=Dictyostelium discoideum GN=mdhB PE=3 SV=1"	Q54D04	1		1
+Exportin-1 OS=Dictyostelium discoideum GN=xpo1 PE=3 SV=2	Q54EV7	1		1
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0169521 PE=4 SV=1	Q75JG3	1		1
+Lysosomal beta glucosidase OS=Dictyostelium discoideum GN=gluA PE=1 SV=2	Q23892	1		1
+Protein KIAA0664 homolog OS=Dictyostelium discoideum GN=cluA PE=2 SV=2	O15818	1		1
+Exportin-4 OS=Dictyostelium discoideum GN=xpo4 PE=3 SV=1	Q54UP5	1		1
+AAA ATPase domain-containing protein OS=Dictyostelium discoideum GN=rvb1 PE=4 SV=1	Q54C28	1		1
+Serine/threonine-protein kinase pakC OS=Dictyostelium discoideum GN=pakC PE=1 SV=1	Q55GV3	1		1
+Copine-C OS=Dictyostelium discoideum GN=cpnC PE=2 SV=1	Q54P51	1		1
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0188200 PE=4 SV=1	Q54I59	1		1
+"NADH dehydrogenase [ubiquinone] flavoprotein 1, mitochondrial OS=Dictyostelium discoideum GN=ndufv1"	Q54I90	1		1
+T-complex protein 1 subunit zeta OS=Dictyostelium discoideum GN=cct6 PE=1 SV=1	Q76NU3	1		1
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0187827 PE=4 SV=1	Q54J99	1		1
+tRNA (guanine-N(7)-)-methyltransferase subunit WDR4 OS=Dictyostelium discoideum GN=wdr4 PE=3 SV=1	Q54UI3	1		1
+5'3'-exonuclease N-and I-domain-containing protein OS=Dictyostelium discoideum GN=DDB_0233015 PE=4	Q54UD1	1		1
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0205282 PE=4 SV=1	Q54ST5	1		1
+Uridine-cytidine kinase C OS=Dictyostelium discoideum GN=udkC PE=3 SV=1	Q54R62	1		1
+Probable serine carboxypeptidase CPVL OS=Dictyostelium discoideum GN=cpvl PE=3 SV=1	Q869Q8	1		1
+Putative uncharacterized protein OS=Dictyostelium discoideum GN=DDB_0185703 PE=4 SV=1	Q54QI3	1		1
+Regulator of chromosome condensation (RCC1) domain-containing protein OS=Dictyostelium discoideum G	Q54BC4	1		1
