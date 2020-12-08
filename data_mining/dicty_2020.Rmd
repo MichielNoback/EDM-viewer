@@ -1,0 +1,108 @@
+---
+title: "Dicty analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#TODO add root folder using knitr root.dir()
+```
+
+
+```{r message = FALSE, warning=FALSE}
+library(ggplot2)
+
+
+source("global.R")
+
+# load the data and visualization functions
+source("../utils/visualization_functions.R")
+```
+
+
+Summary statistics Dicty
+```{r}
+
+all_data_dicty %>% summarise(Unique_bait = n_distinct(bait))
+
+
+
+all_data_dicty %>% group_by(bait, condition) %>% unite(bait_condition, c(bait, condition), sep = '_') %>% summarise(Unique_bait_condition = n_distinct(bait_condition))
+
+# show how many instances of bait and condition there are
+table(all_data_dicty$bait)
+table(all_data_dicty$condition)
+
+# show spectral count per bait + condition
+all_data_dicty %>% group_by(bait, condition) %>% summarise(.groups = 'drop', across(spectral_count, sum))
+
+# show how many uniq uniprot id's are in the set (dicty has 6 chromosomes and 12500 proteins)
+n_distinct(all_data_dicty$uniprot)
+
+# barplot showing the spectral count for each bait
+p <- ggplot(all_data_dicty, aes(x=bait, y =spectral_count))
+p <- p + geom_col() + labs(title = 'Spectral count vs bait')
+p
+
+# barplot showing the spectral count for each condition
+p <- ggplot(all_data_dicty, aes(x=condition, y =spectral_count))
+p <- p + geom_col() + labs(title = 'Spectral count vs condition')
+p
+
+
+# combined spectral count for bait + condition, sum spectral count per group
+my_data <-all_data_dicty %>% group_by(bait, condition) %>% 
+    # .groups = drop is the default, will get warnings if you not specify explicitly 
+    summarise(.groups = 'drop', across(spectral_count, sum)) %>% 
+    unite(bait_condition, c(bait, condition), sep = "_")
+  
+p <- ggplot(my_data, aes(x = bait_condition, y = spectral_count))
+p <- p + geom_col() + labs(title = 'spectral count vs bait + condition')
+p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+# boxplot count vs bait
+p <- ggplot(all_data_dicty, aes(x=bait, y =log10(spectral_count)))
+p <- p + geom_boxplot(outlier.colour = "black") + labs(title = 'Spectral count vs bait')
+p
+
+# boxplot count vs condition
+p <- ggplot(all_data_dicty, aes(x=condition, y =log10(spectral_count)))
+p <- p + geom_boxplot(outlier.colour = "black") + labs(title = 'Spectral count vs condition')
+p
+
+
+# boxplot combined spectral count for bait + condition
+my_data <-all_data_dicty %>% group_by(bait, condition) %>% 
+    unite(bait_condition, c(bait, condition), sep = "_")
+
+my_data$bait_condition <- as.factor(my_data$bait_condition)
+p <- ggplot(my_data, aes(x = bait_condition, y = log10(spectral_count)))
+
+p <- p + geom_boxplot(outlier.colour = "black") + labs(title = 'spectral count vs bait + condition')
+
+p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+
+
+
+```
+
+Summary statistics Neutro
+```{r}
+table(all_data_neutro$bait)
+table(all_data_neutro$condition)
+
+
+```
+
+
+```{r}
+
+plot_spectral_bait_condition_using_uniprot('P36415', 'dicty')
+plot_spectral_bait_condition_using_uniprot('GST', 'dicty')
+plot_spectral_bait_condition_using_uniprot('GST', 'neutro')
+plot_spectral_bait_condition_using_uniprot('Q54YT4', 'dicty')
+
+```
