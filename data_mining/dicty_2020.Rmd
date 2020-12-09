@@ -1,6 +1,8 @@
 ---
 title: "Dicty analysis"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -12,45 +14,120 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r message = FALSE, warning=FALSE}
 library(ggplot2)
 
-
-source("global.R")
-
 # load the data and visualization functions
+source("global.R")
 source("../utils/visualization_functions.R")
+```
+
+Normalised spectral count per group and total, add columns to dataframe
+```{r}
+# Z-score normalisation, by group and total
+all_data_dicty <- all_data_dicty %>% group_by(bait, condition) %>% mutate(grouped_z_score_spectral = scale(spectral_count))
+all_data_dicty <- all_data_dicty %>% mutate(z_score_spectral = scale(spectral_count))
 ```
 
 
 Summary statistics Dicty
 ```{r}
-
 all_data_dicty %>% summarise(Unique_bait = n_distinct(bait))
+```
 
 
-
+Show the unique baits count
+```{r}
 all_data_dicty %>% group_by(bait, condition) %>% unite(bait_condition, c(bait, condition), sep = '_') %>% summarise(Unique_bait_condition = n_distinct(bait_condition))
+```
 
-# show how many instances of bait and condition there are
+
+Show how many instances (lines) of bait there are
+```{r}
 table(all_data_dicty$bait)
+```
+
+Show how many instances (lines) of condition there are
+```{r}
 table(all_data_dicty$condition)
+```
 
-# show spectral count per bait + condition
+Show spectral count per bait + condition
+```{r}
 all_data_dicty %>% group_by(bait, condition) %>% summarise(.groups = 'drop', across(spectral_count, sum))
+```
 
-# show how many uniq uniprot id's are in the set (dicty has 6 chromosomes and 12500 proteins)
+Show normalized spectral count per bait + condition
+```{r}
+all_data_dicty %>% group_by(bait, condition) %>% summarise(.groups = 'drop', across(z_score_spectral, sum))
+# this does not look correct, we shoudld normalize by total spectral count?
+```
+
+Show how many uniq uniprot id's are in the set (dicty has 6 chromosomes and 12500 proteins)
+```{r}
 n_distinct(all_data_dicty$uniprot)
+```
 
-# barplot showing the spectral count for each bait
+uniq proteins per bait_condition
+```{r}
+bait_condition <- group_by(all_data_dicty, bait, condition)
+bait_condition %>% summarise(n_distinct(uniprot))
+```
+
+
+Unique per condition
+```{r}
+group_by(all_data_dicty, condition) %>% summarise(n_distinct(uniprot))
+```
+
+Unique per bait
+```{r}
+group_by(all_data_dicty, bait) %>% summarise(n_distinct(uniprot))
+```
+
+
+Barplot showing the spectral count for each bait
+```{r}
 p <- ggplot(all_data_dicty, aes(x=bait, y =spectral_count))
 p <- p + geom_col() + labs(title = 'Spectral count vs bait')
 p
+```
 
-# barplot showing the spectral count for each condition
+
+Barplot showing the normalized spectral count for each bait
+divided the summed group count by the number of observations in that group so avg per group
+```{r}
+# get group sizes
+group_spectra_normalized <- all_data_dicty %>% group_by(bait) %>% summarise(sum_spectra = sum(spectral_count), group_size = n(), normalized_spectra = sum(spectral_count/n()))
+
+
+p <- ggplot(group_spectra_normalized, aes(x=bait, y = normalized_spectra))
+p <- p + geom_col() + labs(title = 'Normalized Spectral count vs bait')
+p
+```
+
+
+Barplot showing the absolute spectral count for each condition
+```{r}
 p <- ggplot(all_data_dicty, aes(x=condition, y =spectral_count))
 p <- p + geom_col() + labs(title = 'Spectral count vs condition')
 p
+```
+
+Barplot showing the normalized spectral count for each condition:
+divided the summed group count by the number of observations in that group
+```{r}
+
+# get group sizes
+group_spectra_normalized <- all_data_dicty %>% group_by(condition) %>% summarise(sum_spectra = sum(spectral_count), group_size = n(), normalized_spectra = sum(spectral_count/n()))
 
 
-# combined spectral count for bait + condition, sum spectral count per group
+p <- ggplot(group_spectra_normalized, aes(x=condition, y=normalized_spectra))
+p <- p + geom_col() + labs(title = 'Normalized Spectral count vs condition')
+p
+```
+
+
+
+Combined spectral count for bait + condition, sum spectral count per group
+```{r}
 my_data <-all_data_dicty %>% group_by(bait, condition) %>% 
     # .groups = drop is the default, will get warnings if you not specify explicitly 
     summarise(.groups = 'drop', across(spectral_count, sum)) %>% 
@@ -59,20 +136,53 @@ my_data <-all_data_dicty %>% group_by(bait, condition) %>%
 p <- ggplot(my_data, aes(x = bait_condition, y = spectral_count))
 p <- p + geom_col() + labs(title = 'spectral count vs bait + condition')
 p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
 
 
-# boxplot count vs bait
+Combined spectral count for bait + condition, sum normalized spectral count per group
+```{r}
+# get group sizes
+group_spectra_normalized <- all_data_dicty %>% group_by(bait, condition) %>% summarise(sum_spectra = sum(spectral_count), group_size = n(), normalized_spectra = sum(spectral_count/n())) %>% unite(bait_condition, c(bait, condition), sep = "_")
+
+
+p <- ggplot(group_spectra_normalized, aes(x = bait_condition, y = normalized_spectra))
+p <- p + geom_col() + labs(title = 'Normalized spectral count vs bait + condition')
+p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+# TODO overlay with uniq number of proteins in the group?
+# TODO correct for number of uniq proteins in the group? is every observation unique? (yes, checked)
+```{r}
+# get group sizes
+group_spectra_normalized <- all_data_dicty %>% group_by(bait, condition) %>% summarise(sum_spectra = sum(spectral_count), group_size = n(), normalized_spectra = sum(spectral_count/n()), unique_proteins = n_distinct(uniprot)) %>% unite(bait_condition, c(bait, condition), sep = "_")
+
+
+p <- ggplot(group_spectra_normalized, aes(x = bait_condition, y = normalized_spectra))
+p <- p + geom_col() + labs(title = 'Normalized spectral count vs bait + condition') +
+geom_text(aes(label=unique_proteins), vjust=0)
+
+p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+
+Boxplot count vs bait
+```{r}
 p <- ggplot(all_data_dicty, aes(x=bait, y =log10(spectral_count)))
 p <- p + geom_boxplot(outlier.colour = "black") + labs(title = 'Spectral count vs bait')
 p
+```
 
-# boxplot count vs condition
+
+Boxplot count vs condition
+```{r}
 p <- ggplot(all_data_dicty, aes(x=condition, y =log10(spectral_count)))
 p <- p + geom_boxplot(outlier.colour = "black") + labs(title = 'Spectral count vs condition')
 p
+```
 
 
-# boxplot combined spectral count for bait + condition
+Boxplot combined spectral count for bait + condition
+```{r}
 my_data <-all_data_dicty %>% group_by(bait, condition) %>% 
     unite(bait_condition, c(bait, condition), sep = "_")
 
@@ -86,6 +196,51 @@ p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 
 ```
+
+
+
+
+# TODO, check why we have the same numbers for some conditions or baits
+#filter(all_data_dicty, bait == "Gbeta2")
+#filter(all_data_dicty, bait == "Gbeta1")
+#Shows the same number of rows retrieved, counts look different for now....
+
+
+boxplot count vs condition
+```{r}
+p <- ggplot(all_data_dicty, aes(x=condition, y =log2(z_score_spectral)))
+p <- p + geom_boxplot(outlier.colour = "black") + labs(title = 'normalized Spectral count vs bait')
+p
+```
+
+
+boxplot count vs condition
+```{r}
+p <- ggplot(all_data_dicty, aes(x=condition, y =log2(z_score_spectral)))
+p <- p + geom_boxplot(outlier.colour = "black") + labs(title = 'normalized Spectral count vs condition')
+p
+```
+
+
+boxplot count + condition
+```{r}
+my_data <-all_data_dicty %>% group_by(bait, condition) %>% 
+    unite(bait_condition, c(bait, condition), sep = "_")
+
+my_data$bait_condition <- as.factor(my_data$bait_condition)
+p <- ggplot(my_data, aes(x = bait_condition, y = log2(z_score_spectral)))
+
+p <- p + geom_boxplot(outlier.colour = "black") + labs(title = 'normalized spectral count vs bait + condition')
+
+p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+```
+
+
+
+
+
 
 Summary statistics Neutro
 ```{r}
