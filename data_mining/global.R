@@ -66,6 +66,11 @@ get_data <- function(what){
   
   all_data <- bind_rows(data_list)
   all_data <- all_data %>% mutate(across(c(bait, condition), as.factor))
+  
+  
+  # Z-score normalisation, by group and total
+  all_data <- all_data %>% group_by(bait, condition) %>% mutate(grouped_z_score_spectral = scale(spectral_count))
+  all_data <- all_data %>% mutate(z_score_spectral = scale(spectral_count))
 }
 
 # get the data
