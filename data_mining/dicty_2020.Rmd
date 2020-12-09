@@ -112,7 +112,7 @@ p
 ```
 
 Barplot showing the normalized spectral count for each condition:
-divided the summed group count by the number of observations in that group
+divided the summed group count by the number of observations in that group, 
 ```{r}
 
 # get group sizes
@@ -206,9 +206,9 @@ p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 #Shows the same number of rows retrieved, counts look different for now....
 
 
-boxplot count vs condition
+boxplot count vs bait
 ```{r}
-p <- ggplot(all_data_dicty, aes(x=condition, y =log2(z_score_spectral)))
+p <- ggplot(all_data_dicty, aes(x=bait, y =log2(z_score_spectral)))
 p <- p + geom_boxplot(outlier.colour = "black") + labs(title = 'normalized Spectral count vs bait')
 p
 ```
