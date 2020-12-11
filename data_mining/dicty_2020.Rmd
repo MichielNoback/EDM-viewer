@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r message = FALSE, warning=FALSE}
 library(ggplot2)
+library(RVenn)
 
 # load the data and visualization functions
 source("global.R")
@@ -35,7 +36,7 @@ all_data_dicty %>% summarise(Unique_bait = n_distinct(bait))
 
 Show the unique baits count
 ```{r}
-all_data_dicty %>% group_by(bait, condition) %>% unite(bait_condition, c(bait, condition), sep = '_') %>% summarise(Unique_bait_condition = n_distinct(bait_condition))
+all_data_dicty %>% group_by(bait, condition) %>% tidyr::unite(bait_condition, c(bait, condition), sep = '_') %>% summarise(Unique_bait_condition = n_distinct(bait_condition))
 ```
 
 
@@ -131,7 +132,7 @@ Combined spectral count for bait + condition, sum spectral count per group
 my_data <-all_data_dicty %>% group_by(bait, condition) %>% 
     # .groups = drop is the default, will get warnings if you not specify explicitly 
     summarise(.groups = 'drop', across(spectral_count, sum)) %>% 
-    unite(bait_condition, c(bait, condition), sep = "_")
+    tidy::unite(bait_condition, c(bait, condition), sep = "_")
   
 p <- ggplot(my_data, aes(x = bait_condition, y = spectral_count))
 p <- p + geom_col() + labs(title = 'spectral count vs bait + condition')
@@ -142,7 +143,7 @@ p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 Combined spectral count for bait + condition, sum normalized spectral count per group
 ```{r}
 # get group sizes
-group_spectra_normalized <- all_data_dicty %>% group_by(bait, condition) %>% summarise(sum_spectra = sum(spectral_count), group_size = n(), normalized_spectra = sum(spectral_count/n())) %>% unite(bait_condition, c(bait, condition), sep = "_")
+group_spectra_normalized <- all_data_dicty %>% group_by(bait, condition) %>% summarise(sum_spectra = sum(spectral_count), group_size = n(), normalized_spectra = sum(spectral_count/n())) %>% tidyr::unite(bait_condition, c(bait, condition), sep = "_")
 
 
 p <- ggplot(group_spectra_normalized, aes(x = bait_condition, y = normalized_spectra))
@@ -154,7 +155,7 @@ p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 # TODO correct for number of uniq proteins in the group? is every observation unique? (yes, checked)
 ```{r}
 # get group sizes
-group_spectra_normalized <- all_data_dicty %>% group_by(bait, condition) %>% summarise(sum_spectra = sum(spectral_count), group_size = n(), normalized_spectra = sum(spectral_count/n()), unique_proteins = n_distinct(uniprot)) %>% unite(bait_condition, c(bait, condition), sep = "_")
+group_spectra_normalized <- all_data_dicty %>% group_by(bait, condition) %>% summarise(sum_spectra = sum(spectral_count), group_size = n(), normalized_spectra = sum(spectral_count/n()), unique_proteins = n_distinct(uniprot)) %>% tidyr::unite(bait_condition, c(bait, condition), sep = "_")
 
 
 p <- ggplot(group_spectra_normalized, aes(x = bait_condition, y = normalized_spectra))
@@ -184,7 +185,7 @@ p
 Boxplot combined spectral count for bait + condition
 ```{r}
 my_data <-all_data_dicty %>% group_by(bait, condition) %>% 
-    unite(bait_condition, c(bait, condition), sep = "_")
+    tidyr::unite(bait_condition, c(bait, condition), sep = "_")
 
 my_data$bait_condition <- as.factor(my_data$bait_condition)
 p <- ggplot(my_data, aes(x = bait_condition, y = log10(spectral_count)))
@@ -225,7 +226,7 @@ p
 boxplot count + condition
 ```{r}
 my_data <-all_data_dicty %>% group_by(bait, condition) %>% 
-    unite(bait_condition, c(bait, condition), sep = "_")
+    tidyr::unite(bait_condition, c(bait, condition), sep = "_")
 
 my_data$bait_condition <- as.factor(my_data$bait_condition)
 p <- ggplot(my_data, aes(x = bait_condition, y = log2(z_score_spectral)))
@@ -238,24 +239,85 @@ p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 
-
-
-
-
-Summary statistics Neutro
+venn diagrams over proteins per bait_condition
 ```{r}
-table(all_data_neutro$bait)
-table(all_data_neutro$condition)
+my_data <-all_data_dicty %>% group_by(bait, condition) %>% tidyr::unite(bait_condition, c(bait, condition), sep = "_")
 
 
+bait_condition <- split(my_data$uniprot, my_data$bait_condition)
+toy = Venn(bait_condition)
+#setmap(toy) # to many uniprot ids to show on the axis, needs filtering
+ggvenn(toy, slice = c(1, 2,4))
+
+# get character vector with overlapping proteins 
+overlap(toy, c("Galpha2_starv", "Galpha2_veg", "Galpha8_GDP", "Gbeta1_Normal"))
+
+# use discern to get set difference
+# use discern discern(c(a,b), c(c,d)) -> first takes union, then difference
 ```
 
 
+Venn diagrams over bait
 ```{r}
+bait <- split(all_data_dicty$uniprot, all_data_dicty$bait)
+toy_bait = Venn(bait)
+ggvenn(toy_bait, slice = c(1, 2,4))
+```
 
-plot_spectral_bait_condition_using_uniprot('P36415', 'dicty')
-plot_spectral_bait_condition_using_uniprot('GST', 'dicty')
-plot_spectral_bait_condition_using_uniprot('GST', 'neutro')
-plot_spectral_bait_condition_using_uniprot('Q54YT4', 'dicty')
+
+Venn diagrams over condition
+```{r}
+condition <- split(all_data_dicty$uniprot, all_data_dicty$condition)
+toy_condition = Venn(condition)
+ggvenn(toy_condition, slice = c(1, 2,4))
+```
+
+
+# NOT FINISHED!
+Heatmap for uniprot presence/absence over bait, condition or experiment, shows to many proteins to be interpretable. Filter first on protein
+```{r}
+filterd <- filter(all_data_dicty, uniprot == 'sp|P0A9K9|SLYD_ECOLI')
+
+condition <- split(filterd$uniprot, all_data_dicty$condition)
+bait <- split(filterd$uniprot, all_data_dicty$bait)
+
+toy_condition_filtered = Venn(condition)
+setmap(toy_condition_filtered, element_clustering = FALSE, set_clustering = FALSE)
+
+toy_bait_filtered = Venn(bait)
+setmap(toy_bait_filtered, element_clustering = FALSE, set_clustering = FALSE)
+```
+crossproduct of experiments, count shared uniprot
+```{r}
+my_data <-all_data_dicty %>% group_by(bait, condition) %>% tidyr::unite(bait_condition, c(bait, condition), sep = "_")
+count(my_data, bait_condition, uniprot) %>%
+  spread(bait_condition, n, fill = 0) %>%
+  select(-uniprot) %>%
+  as.matrix() %>%
+  crossprod()
+
+
+# check value from crossproduct
+#                          Galpha2_starv
+#RasG1_Normal               279
+
+bait_condition <- split(my_data$uniprot, my_data$bait_condition)
+toy = Venn(bait_condition)
+length(overlap(toy, c("Galpha2_starv", "RasG1_Normal")))
+# same number of proteins reported
 
 ```
+
+Simple heatmap with clustering
+```{r}
+heatmap(overlap)
+```
+
+ggplot heatmap
+```{r}
+overlap_long <- melt(overlap)
+ggplot(overlap_long, aes(x = Var1, y = Var2, fill = value)) +
+geom_tile() +
+theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
