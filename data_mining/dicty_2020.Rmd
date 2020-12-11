@@ -321,3 +321,30 @@ geom_tile() +
 theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
+igraph plot
+```{r}
+library(igraph)
+library(visNetwork)
+
+my_data <-all_data_dicty %>% group_by(bait, condition) %>% tidyr::unite(bait_condition, c(bait, condition), sep = "_")
+x <- my_data %>% separate(uniprot, c("a", "b", "c", "protid", "genid", "source"), extra = "merge", fill = "left", sep = '[_|]')
+x <- x %>% select(-one_of(c("a", "b", "c")))
+
+# resulting in 17k+ edges, hairball!, need to filter
+new_x <- x %>% filter(spectral_count > 500)
+
+nodes <- as.data.frame(unique(new_x$bait_condition))
+colnames(nodes) <- c('id')
+nodes <- nodes %>% add_row(id = unique(new_x$genid))
+nodes$label <- nodes$id
+
+
+my_edges <- as.data.frame(new_x$bait_condition)
+my_edges$to <- new_x$genid 
+colnames(my_edges) <- c('from', 'to')
+
+graph <- graph_from_data_frame(my_edges, directed = FALSE)
+
+visNetwork(nodes = nodes, edges = my_edges) %>%
+  visLayout(improvedLayout = TRUE)
+```
