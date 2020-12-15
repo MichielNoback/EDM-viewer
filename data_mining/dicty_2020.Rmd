@@ -132,7 +132,7 @@ Combined spectral count for bait + condition, sum spectral count per group
 my_data <-all_data_dicty %>% group_by(bait, condition) %>% 
     # .groups = drop is the default, will get warnings if you not specify explicitly 
     summarise(.groups = 'drop', across(spectral_count, sum)) %>% 
-    tidy::unite(bait_condition, c(bait, condition), sep = "_")
+    tidyr::unite(bait_condition, c(bait, condition), sep = "_")
   
 p <- ggplot(my_data, aes(x = bait_condition, y = spectral_count))
 p <- p + geom_col() + labs(title = 'spectral count vs bait + condition')
@@ -304,24 +304,34 @@ count(my_data, bait_condition, uniprot) %>%
 bait_condition <- split(my_data$uniprot, my_data$bait_condition)
 toy = Venn(bait_condition)
 length(overlap(toy, c("Galpha2_starv", "RasG1_Normal")))
+
 # same number of proteins reported
 
 ```
 
 Simple heatmap with clustering
 ```{r}
-heatmap(overlap)
+my_data <-all_data_dicty %>% group_by(bait, condition) %>% tidyr::unite(bait_condition, c(bait, condition), sep = "_")
+
+overlapping <- count(my_data, bait_condition, uniprot) %>%
+  spread(bait_condition, n, fill = 0) %>%
+  select(-uniprot) %>%
+  as.matrix() %>%
+  crossprod()
+
+
+heatmap(overlapping)
 ```
 
 ggplot heatmap
 ```{r}
-overlap_long <- melt(overlap)
+overlap_long <- reshape2::melt(overlapping)
 ggplot(overlap_long, aes(x = Var1, y = Var2, fill = value)) +
 geom_tile() +
 theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-igraph plot
+igraph network plot
 ```{r}
 library(igraph)
 library(visNetwork)
@@ -330,21 +340,40 @@ my_data <-all_data_dicty %>% group_by(bait, condition) %>% tidyr::unite(bait_con
 x <- my_data %>% separate(uniprot, c("a", "b", "c", "protid", "genid", "source"), extra = "merge", fill = "left", sep = '[_|]')
 x <- x %>% select(-one_of(c("a", "b", "c")))
 
-# resulting in 17k+ edges, hairball!, need to filter
-new_x <- x %>% filter(spectral_count > 500)
+# resulting in 17k+ interactions, hairball!, need to filter
+new_x <- x %>% filter(spectral_count > 200)
 
 nodes <- as.data.frame(unique(new_x$bait_condition))
-colnames(nodes) <- c('id')
-nodes <- nodes %>% add_row(id = unique(new_x$genid))
+nodes$shape = 'triangle'
+colnames(nodes) <- c('id', 'shape')
+
+nodes <- nodes %>% add_row(id = unique(new_x$genid), shape = 'circle')
+
+#nodes <- nodes %>% add_row(id = unique(new_x$genid))
 nodes$label <- nodes$id
 
+# nodes (shapes) and edges (thickness  = width, use normalized counts) need to be done
+# nodes scale (value) on basis of number of interactions
+# gene ids, are not complete, <NA> or missing. Check the seperate function!
 
-my_edges <- as.data.frame(new_x$bait_condition)
-my_edges$to <- new_x$genid 
-colnames(my_edges) <- c('from', 'to')
+
+my_edges <- data.frame(new_x$bait_condition, new_x$genid, new_x$z_score_spectral)
+colnames(my_edges) <- c('from', 'to', 'value')
 
 graph <- graph_from_data_frame(my_edges, directed = FALSE)
 
+# color groups based on community detection, method louvain
+#cluster <- cluster_louvain(graph)
+#cluster_df <- data.frame(as.list(membership(cluster)))
+#cluster_df <- as.data.frame(t(cluster_df))
+#cluster_df$label <- rownames(cluster_df)
+#nodes <- left_join(nodes, cluster_df, by = 'label')
+#colnames(nodes)[3] <- 'group'
+
 visNetwork(nodes = nodes, edges = my_edges) %>%
+  visOptions(highlightNearest = list(enabled = TRUE, algorithm = "hierarchical", 
+   degree = list(from = 1, to = 1)), nodesIdSelection = TRUE) %>%
+  visPhysics(stabilization = FALSE, barnesHut = ) %>%
   visLayout(improvedLayout = TRUE)
 ```
+
