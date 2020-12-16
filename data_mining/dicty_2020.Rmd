@@ -1,7 +1,11 @@
 ---
 title: "Dicty analysis"
 output:
-  html_document: default
+  html_document: 
+    toc: true
+    toc_depth: 2
+    toc_float: true
+
   pdf_document: default
 ---
 
@@ -23,20 +27,28 @@ source("../utils/visualization_functions.R")
 Normalised spectral count per group and total, add columns to dataframe
 ```{r}
 # Z-score normalisation, by group and total
-all_data_dicty <- all_data_dicty %>% group_by(bait, condition) %>% mutate(grouped_z_score_spectral = scale(spectral_count))
-all_data_dicty <- all_data_dicty %>% mutate(z_score_spectral = scale(spectral_count))
+all_data_dicty <- all_data_dicty %>% 
+  group_by(bait, condition) %>% 
+  mutate(grouped_z_score_spectral = scale(spectral_count))
+
+all_data_dicty <- all_data_dicty %>% 
+  mutate(z_score_spectral = scale(spectral_count))
 ```
 
-
+# summary
 Summary statistics Dicty
 ```{r}
-all_data_dicty %>% summarise(Unique_bait = n_distinct(bait))
+all_data_dicty %>% 
+  summarise(Unique_bait = n_distinct(bait))
 ```
 
 
 Show the unique baits count
 ```{r}
-all_data_dicty %>% group_by(bait, condition) %>% tidyr::unite(bait_condition, c(bait, condition), sep = '_') %>% summarise(Unique_bait_condition = n_distinct(bait_condition))
+all_data_dicty %>% 
+  group_by(bait, condition) %>% 
+  tidyr::unite(bait_condition, c(bait, condition), sep = '_') %>% 
+  summarise(Unique_bait_condition = n_distinct(bait_condition))
 ```
 
 
@@ -50,15 +62,19 @@ Show how many instances (lines) of condition there are
 table(all_data_dicty$condition)
 ```
 
-Show spectral count per bait + condition
+Show total spectral count per bait + condition
 ```{r}
-all_data_dicty %>% group_by(bait, condition) %>% summarise(.groups = 'drop', across(spectral_count, sum))
+all_data_dicty %>% 
+  group_by(bait, condition) %>% 
+  summarise(.groups = 'drop', across(spectral_count, sum))
 ```
 
 Show normalized spectral count per bait + condition
 ```{r}
-all_data_dicty %>% group_by(bait, condition) %>% summarise(.groups = 'drop', across(z_score_spectral, sum))
-# this does not look correct, we shoudld normalize by total spectral count?
+all_data_dicty %>% 
+  group_by(bait, condition) %>% 
+  summarise(.groups = 'drop', across(z_score_spectral, sum))
+# this does not look correct, we should normalize by total spectral count?, can we sum z-scores?
 ```
 
 Show how many uniq uniprot id's are in the set (dicty has 6 chromosomes and 12500 proteins)
@@ -69,22 +85,26 @@ n_distinct(all_data_dicty$uniprot)
 uniq proteins per bait_condition
 ```{r}
 bait_condition <- group_by(all_data_dicty, bait, condition)
-bait_condition %>% summarise(n_distinct(uniprot))
+
+bait_condition %>% 
+  summarise(n_distinct(uniprot))
 ```
 
 
-Unique per condition
+Unique proteins per condition
 ```{r}
-group_by(all_data_dicty, condition) %>% summarise(n_distinct(uniprot))
+group_by(all_data_dicty, condition) %>% 
+  summarise(n_distinct(uniprot))
 ```
 
-Unique per bait
+Unique proteins per bait
 ```{r}
-group_by(all_data_dicty, bait) %>% summarise(n_distinct(uniprot))
+group_by(all_data_dicty, bait) %>% 
+  summarise(n_distinct(uniprot))
 ```
 
 
-Barplot showing the spectral count for each bait
+Barplot showing the total spectral count for each bait
 ```{r}
 p <- ggplot(all_data_dicty, aes(x=bait, y =spectral_count))
 p <- p + geom_col() + labs(title = 'Spectral count vs bait')
@@ -92,15 +112,16 @@ p
 ```
 
 
-Barplot showing the normalized spectral count for each bait
-divided the summed group count by the number of observations in that group so avg per group
+Barplot showing the average spectral count per protein for each bait
+divided the summed group count by the number of observations in that group so avg count per group
 ```{r}
 # get group sizes
-group_spectra_normalized <- all_data_dicty %>% group_by(bait) %>% summarise(sum_spectra = sum(spectral_count), group_size = n(), normalized_spectra = sum(spectral_count/n()))
+group_spectra_normalized <- all_data_dicty %>% 
+  group_by(bait) %>% 
+  summarise(sum_spectra = sum(spectral_count), group_size = n(), average_spectra = sum(spectral_count/n()))
 
-
-p <- ggplot(group_spectra_normalized, aes(x=bait, y = normalized_spectra))
-p <- p + geom_col() + labs(title = 'Normalized Spectral count vs bait')
+p <- ggplot(group_spectra_normalized, aes(x=bait, y = average_spectra))
+p <- p + geom_col() + labs(title = 'average Spectral count per bait')
 p
 ```
 
@@ -112,16 +133,18 @@ p <- p + geom_col() + labs(title = 'Spectral count vs condition')
 p
 ```
 
-Barplot showing the normalized spectral count for each condition:
+Barplot showing the average spectral count for each condition:
 divided the summed group count by the number of observations in that group, 
 ```{r}
 
 # get group sizes
-group_spectra_normalized <- all_data_dicty %>% group_by(condition) %>% summarise(sum_spectra = sum(spectral_count), group_size = n(), normalized_spectra = sum(spectral_count/n()))
+group_spectra_normalized <- all_data_dicty %>% 
+  group_by(condition) %>% 
+  summarise(sum_spectra = sum(spectral_count), group_size = n(), average_spectra = sum(spectral_count/n()))
 
 
-p <- ggplot(group_spectra_normalized, aes(x=condition, y=normalized_spectra))
-p <- p + geom_col() + labs(title = 'Normalized Spectral count vs condition')
+p <- ggplot(group_spectra_normalized, aes(x=condition, y=average_spectra))
+p <- p + geom_col() + labs(title = 'average Spectral count vs condition')
 p
 ```
 
@@ -140,40 +163,46 @@ p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 
-Combined spectral count for bait + condition, sum normalized spectral count per group
+Combined spectral count for bait + condition, average spectral count per group
 ```{r}
 # get group sizes
-group_spectra_normalized <- all_data_dicty %>% group_by(bait, condition) %>% summarise(sum_spectra = sum(spectral_count), group_size = n(), normalized_spectra = sum(spectral_count/n())) %>% tidyr::unite(bait_condition, c(bait, condition), sep = "_")
+group_spectra_normalized <- all_data_dicty %>% 
+  group_by(bait, condition) %>% 
+  summarise(sum_spectra = sum(spectral_count), group_size = n(), average_spectra = sum(spectral_count/n())) %>% 
+  tidyr::unite(bait_condition, c(bait, condition), sep = "_")
 
-
-p <- ggplot(group_spectra_normalized, aes(x = bait_condition, y = normalized_spectra))
-p <- p + geom_col() + labs(title = 'Normalized spectral count vs bait + condition')
+p <- ggplot(group_spectra_normalized, aes(x = bait_condition, y = average_spectra))
+p <- p + geom_col() + labs(title = 'average spectral count vs bait + condition')
 p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-# TODO overlay with uniq number of proteins in the group?
-# TODO correct for number of uniq proteins in the group? is every observation unique? (yes, checked)
+## average spectra per experiment
 ```{r}
 # get group sizes
-group_spectra_normalized <- all_data_dicty %>% group_by(bait, condition) %>% summarise(sum_spectra = sum(spectral_count), group_size = n(), normalized_spectra = sum(spectral_count/n()), unique_proteins = n_distinct(uniprot)) %>% tidyr::unite(bait_condition, c(bait, condition), sep = "_")
+group_spectra_normalized <- all_data_dicty %>% 
+  group_by(bait, condition) %>% 
+  summarise(sum_spectra = sum(spectral_count), group_size = n(), normalized_spectra = sum(spectral_count/n()), unique_proteins = n_distinct(uniprot)) %>% 
+  tidyr::unite(bait_condition, c(bait, condition), sep = "_")
 
 
 p <- ggplot(group_spectra_normalized, aes(x = bait_condition, y = normalized_spectra))
-p <- p + geom_col() + labs(title = 'Normalized spectral count vs bait + condition') +
+p <- p + geom_col() + labs(title = 'average spectral count vs bait + condition') +
 geom_text(aes(label=unique_proteins), vjust=0)
 
 p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 
-Boxplot count vs bait
+# boxplots
+## boxplot bait
+Boxplot absolute count vs bait
 ```{r}
 p <- ggplot(all_data_dicty, aes(x=bait, y =log10(spectral_count)))
 p <- p + geom_boxplot(outlier.colour = "black") + labs(title = 'Spectral count vs bait')
 p
 ```
 
-
+## boxplot condition
 Boxplot count vs condition
 ```{r}
 p <- ggplot(all_data_dicty, aes(x=condition, y =log10(spectral_count)))
@@ -181,10 +210,11 @@ p <- p + geom_boxplot(outlier.colour = "black") + labs(title = 'Spectral count v
 p
 ```
 
-
+## boxplot experiment
 Boxplot combined spectral count for bait + condition
 ```{r}
-my_data <-all_data_dicty %>% group_by(bait, condition) %>% 
+my_data <-all_data_dicty %>% 
+  group_by(bait, condition) %>% 
     tidyr::unite(bait_condition, c(bait, condition), sep = "_")
 
 my_data$bait_condition <- as.factor(my_data$bait_condition)
@@ -200,21 +230,22 @@ p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 
 
+<!--
+TODO, check why we have the same numbers for some conditions or baits
+filter(all_data_dicty, bait == "Gbeta2")
+filter(all_data_dicty, bait == "Gbeta1")
+Shows the same number of rows retrieved, counts look different for now....
+-->
 
-# TODO, check why we have the same numbers for some conditions or baits
-#filter(all_data_dicty, bait == "Gbeta2")
-#filter(all_data_dicty, bait == "Gbeta1")
-#Shows the same number of rows retrieved, counts look different for now....
-
-
-boxplot count vs bait
+# z-score normalized boxplot, 
+## count vs bait
 ```{r}
 p <- ggplot(all_data_dicty, aes(x=bait, y =log2(z_score_spectral)))
 p <- p + geom_boxplot(outlier.colour = "black") + labs(title = 'normalized Spectral count vs bait')
 p
 ```
 
-
+## count vs condition
 boxplot count vs condition
 ```{r}
 p <- ggplot(all_data_dicty, aes(x=condition, y =log2(z_score_spectral)))
@@ -222,24 +253,23 @@ p <- p + geom_boxplot(outlier.colour = "black") + labs(title = 'normalized Spect
 p
 ```
 
-
-boxplot count + condition
+## boxplot count vs condition
 ```{r}
-my_data <-all_data_dicty %>% group_by(bait, condition) %>% 
+my_data <-all_data_dicty %>% 
+  group_by(bait, condition) %>% 
     tidyr::unite(bait_condition, c(bait, condition), sep = "_")
 
 my_data$bait_condition <- as.factor(my_data$bait_condition)
+
 p <- ggplot(my_data, aes(x = bait_condition, y = log2(z_score_spectral)))
-
 p <- p + geom_boxplot(outlier.colour = "black") + labs(title = 'normalized spectral count vs bait + condition')
-
 p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 
 ```
 
 
-venn diagrams over proteins per bait_condition
+## Venn diagrams over proteins per bait_condition
 ```{r}
 my_data <-all_data_dicty %>% group_by(bait, condition) %>% tidyr::unite(bait_condition, c(bait, condition), sep = "_")
 
@@ -257,7 +287,7 @@ overlap(toy, c("Galpha2_starv", "Galpha2_veg", "Galpha8_GDP", "Gbeta1_Normal"))
 ```
 
 
-Venn diagrams over bait
+## Venn diagrams over bait
 ```{r}
 bait <- split(all_data_dicty$uniprot, all_data_dicty$bait)
 toy_bait = Venn(bait)
@@ -265,7 +295,7 @@ ggvenn(toy_bait, slice = c(1, 2,4))
 ```
 
 
-Venn diagrams over condition
+## Venn diagrams over condition
 ```{r}
 condition <- split(all_data_dicty$uniprot, all_data_dicty$condition)
 toy_condition = Venn(condition)
@@ -273,8 +303,8 @@ ggvenn(toy_condition, slice = c(1, 2,4))
 ```
 
 
-# NOT FINISHED!
-Heatmap for uniprot presence/absence over bait, condition or experiment, shows to many proteins to be interpretable. Filter first on protein
+# Presence/absence protein
+Heatmap for uniprot presence/absence over bait, condition or experiment. Filtered on protein
 ```{r}
 filterd <- filter(all_data_dicty, uniprot == 'sp|P0A9K9|SLYD_ECOLI')
 
@@ -287,9 +317,13 @@ setmap(toy_condition_filtered, element_clustering = FALSE, set_clustering = FALS
 toy_bait_filtered = Venn(bait)
 setmap(toy_bait_filtered, element_clustering = FALSE, set_clustering = FALSE)
 ```
-crossproduct of experiments, count shared uniprot
+
+# Overlapping proteins
 ```{r}
-my_data <-all_data_dicty %>% group_by(bait, condition) %>% tidyr::unite(bait_condition, c(bait, condition), sep = "_")
+my_data <-all_data_dicty %>% 
+  group_by(bait, condition) %>% 
+  tidyr::unite(bait_condition, c(bait, condition), sep = "_")
+
 count(my_data, bait_condition, uniprot) %>%
   spread(bait_condition, n, fill = 0) %>%
   select(-uniprot) %>%
@@ -306,12 +340,13 @@ toy = Venn(bait_condition)
 length(overlap(toy, c("Galpha2_starv", "RasG1_Normal")))
 
 # same number of proteins reported
-
 ```
 
-Simple heatmap with clustering
+## Simple heatmap with clustering on overlapping proteins per experiment
 ```{r}
-my_data <-all_data_dicty %>% group_by(bait, condition) %>% tidyr::unite(bait_condition, c(bait, condition), sep = "_")
+my_data <-all_data_dicty %>% 
+  group_by(bait, condition) %>% 
+  tidyr::unite(bait_condition, c(bait, condition), sep = "_")
 
 overlapping <- count(my_data, bait_condition, uniprot) %>%
   spread(bait_condition, n, fill = 0) %>%
@@ -319,11 +354,10 @@ overlapping <- count(my_data, bait_condition, uniprot) %>%
   as.matrix() %>%
   crossprod()
 
-
 heatmap(overlapping)
 ```
 
-ggplot heatmap
+## ggplot heatmap overlapping proteins per experiment
 ```{r}
 overlap_long <- reshape2::melt(overlapping)
 ggplot(overlap_long, aes(x = Var1, y = Var2, fill = value)) +
@@ -331,7 +365,7 @@ geom_tile() +
 theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-igraph network plot
+# Igraph network plot
 ```{r}
 library(igraph)
 library(visNetwork)
