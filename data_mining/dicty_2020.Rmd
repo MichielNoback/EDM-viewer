@@ -3,17 +3,16 @@ title: "Dicty analysis"
 output:
   html_document: 
     toc: true
-    toc_depth: 2
+    toc_depth: 3
     toc_float: true
 
   pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 #TODO add root folder using knitr root.dir()
 ```
-
 
 ```{r message = FALSE, warning=FALSE}
 library(ggplot2)
@@ -24,24 +23,12 @@ source("global.R")
 source("../utils/visualization_functions.R")
 ```
 
-Normalised spectral count per group and total, add columns to dataframe
-```{r}
-# Z-score normalisation, by group and total
-all_data_dicty <- all_data_dicty %>% 
-  group_by(bait, condition) %>% 
-  mutate(grouped_z_score_spectral = scale(spectral_count))
-
-all_data_dicty <- all_data_dicty %>% 
-  mutate(z_score_spectral = scale(spectral_count))
-```
-
 # summary
 Summary statistics Dicty
 ```{r}
 all_data_dicty %>% 
   summarise(Unique_bait = n_distinct(bait))
 ```
-
 
 Show the unique baits count
 ```{r}
@@ -50,7 +37,6 @@ all_data_dicty %>%
   tidyr::unite(bait_condition, c(bait, condition), sep = '_') %>% 
   summarise(Unique_bait_condition = n_distinct(bait_condition))
 ```
-
 
 Show how many instances (lines) of bait there are
 ```{r}
@@ -89,7 +75,6 @@ bait_condition <- group_by(all_data_dicty, bait, condition)
 bait_condition %>% 
   summarise(n_distinct(uniprot))
 ```
-
 
 Unique proteins per condition
 ```{r}
@@ -159,6 +144,7 @@ p <- p + geom_col() + labs(title = 'average Spectral count vs condition')
 p
 ```
 
+Combined spectral count for bait + condition, average spectral count per group
 ```{r}
 # get group sizes
 group_spectra_normalized <- all_data_dicty %>% 
@@ -172,6 +158,7 @@ p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 Combined spectral count for bait + condition, average spectral count per group
+Add overlay with unique proteins 
 ```{r}
 # get group sizes
 group_spectra_normalized <- all_data_dicty %>% 
@@ -216,11 +203,7 @@ p <- ggplot(my_data, aes(x = bait_condition, y = log10(spectral_count)))
 p <- p + geom_boxplot(outlier.colour = "black") + labs(title = 'spectral count vs bait + condition')
 
 p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-
-
 ```
-
 
 
 <!--
@@ -276,10 +259,11 @@ toy_condition = Venn(condition)
 ggvenn(toy_condition, slice = c(1, 2,4))
 ```
 
-
 ## overlap proteins per bait_condition
 ```{r}
-my_data <-all_data_dicty %>% group_by(bait, condition) %>% tidyr::unite(bait_condition, c(bait, condition), sep = "_")
+my_data <-all_data_dicty %>% 
+  group_by(bait, condition) %>% 
+  tidyr::unite(bait_condition, c(bait, condition), sep = "_")
 
 
 bait_condition <- split(my_data$uniprot, my_data$bait_condition)
@@ -287,6 +271,10 @@ toy = Venn(bait_condition)
 #setmap(toy) # to many uniprot ids to show on the axis, needs filtering
 ggvenn(toy, slice = c(1, 2,4))
 
+```
+
+Method to retrieve the overlapping proteins per experiment
+```{r include=FALSE}
 # get character vector with overlapping proteins 
 overlap(toy, c("Galpha2_starv", "Galpha2_veg", "Galpha8_GDP", "Gbeta1_Normal"))
 
@@ -358,7 +346,193 @@ theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 
+# Correlations
+## raw data
+### bait heatmap on raw spectra correlation
+```{r}
+pivoted <- all_data_dicty %>% 
+  group_by(bait) %>%
+  select(uniprot, bait, spectral_count) %>%
+  mutate(row = row_number()) %>%
+  tidyr::pivot_wider(names_from = uniprot, values_from = spectral_count, values_fill = 0) %>%
+  select(-row) %>%
+  summarise_all(funs(sum)) %>%
+  tibble::column_to_rownames(var = "bait")
+
+pivoted_t <- t(pivoted)
+res_t <- cor(pivoted_t) # experiment vs experiment
+heatmap(x = res_t, symm = TRUE)
+```
+
+### Condition heatmap on raw spectra correlation
+```{r}
+pivoted <- all_data_dicty %>% 
+  group_by(condition) %>%
+  select(uniprot, condition, spectral_count) %>%
+  mutate(row = row_number()) %>%
+  tidyr::pivot_wider(names_from = uniprot, values_from = spectral_count, values_fill = 0) %>%
+  select(-row) %>%
+  summarise_all(funs(sum)) %>%
+  tibble::column_to_rownames(var = "condition")
+
+pivoted_t <- t(pivoted)
+res_t <- cor(pivoted_t) # experiment vs experiment
+heatmap(x = res_t, symm = TRUE)
+```
+
+### Experiment heatmap on raw spectra correlation
+```{r}
+pivoted_experiment <- all_data_dicty %>% 
+  group_by(bait, condition) %>%
+  select(uniprot, bait, condition, spectral_count) %>%
+  mutate(row = row_number()) %>%
+  tidyr::pivot_wider(names_from = uniprot, values_from = spectral_count, values_fill = 0) %>%
+  summarise_all(funs(sum)) %>%
+  tidyr::unite(bait_condition, c(bait, condition), sep = "_") %>%
+  select(-row) %>%
+  tibble::column_to_rownames(var = "bait_condition")
+
+
+pivoted_experiment_t <- t(pivoted_experiment)
+res_t_pivoted_experiment <- cor(pivoted_experiment_t)
+heatmap(x = res_t_pivoted_experiment, symm = TRUE)
+```
+
+## Normalized data
+
+### Bait heatmap on normalized spectra correlation
+```{r}
+pivoted <- all_data_dicty %>% 
+  group_by(bait) %>%
+  select(uniprot, bait, z_score_spectral) %>%
+  mutate(row = row_number()) %>%
+  tidyr::pivot_wider(names_from = uniprot, values_from = z_score_spectral, values_fill = 0) %>%
+  select(-row) %>%
+  summarise_all(funs(sum)) %>%
+  tibble::column_to_rownames(var = "bait")
+
+pivoted_t <- t(pivoted)
+res_t <- cor(pivoted_t) # experiment vs experiment
+heatmap(x = res_t, symm = TRUE)
+```
+
+### Condition heatmap on normalized spectra correlation
+```{r}
+pivoted <- all_data_dicty %>% 
+  group_by(condition) %>%
+  select(uniprot, condition, z_score_spectral) %>%
+  mutate(row = row_number()) %>%
+  tidyr::pivot_wider(names_from = uniprot, values_from = z_score_spectral, values_fill = 0) %>%
+  select(-row) %>%
+  summarise_all(funs(sum)) %>%
+  tibble::column_to_rownames(var = "condition")
+
+pivoted_t <- t(pivoted)
+res_t <- cor(pivoted_t) # experiment vs experiment
+heatmap(x = res_t, symm = TRUE)
+```
+
+### Experiment heatmap on normalized spectra correlation
+```{r}
+pivoted_experiment <- all_data_dicty %>% 
+  group_by(bait, condition) %>%
+  select(uniprot, bait, condition, z_score_spectral) %>%
+  mutate(row = row_number()) %>%
+  tidyr::pivot_wider(names_from = uniprot, values_from = z_score_spectral, values_fill = 0) %>%
+  summarise_all(funs(sum)) %>%
+  tidyr::unite(bait_condition, c(bait, condition), sep = "_") %>%
+  select(-row) %>%
+  tibble::column_to_rownames(var = "bait_condition")
+
+
+pivoted_experiment_t <- t(pivoted_experiment)
+res_t_pivoted_experiment <- cor(pivoted_experiment_t)
+heatmap(x = res_t_pivoted_experiment, symm = TRUE)
+```
+
+
 # PCA 
+## bait on raw spectral_count 
+```{r}
+
+pivoted <- all_data_dicty %>% 
+  group_by(bait) %>%
+  select(uniprot, bait, spectral_count) %>%
+  mutate(row = row_number()) %>%
+  tidyr::pivot_wider(names_from = uniprot, values_from = spectral_count, values_fill = 0) %>%
+  select(-row) %>%
+  summarise_all(funs(sum)) %>%
+  tibble::column_to_rownames(var = "bait")
+  
+
+wdbc.pr <- prcomp(pivoted)
+summary(wdbc.pr)
+
+
+screeplot(wdbc.pr, type = "l", npcs = 12, main = "Screeplot of the first 12 PCs")
+abline(h = 1, col="red", lty=5)
+legend("topright", legend=c("Eigenvalue = 1"),
+       col=c("red"), lty=5, cex=0.6)
+cumpro <- cumsum(wdbc.pr$sdev^2 / sum(wdbc.pr$sdev^2))
+plot(cumpro[0:15], xlab = "PC #", ylab = "Amount of explained variance", main = "Cumulative variance plot")
+
+plot(wdbc.pr$x[,1],wdbc.pr$x[,2], xlab="PC1 (50%)", ylab = "PC2 (20%)", main = "PC1 / PC2 - plot")
+
+library("factoextra")
+fviz_pca_ind(wdbc.pr, geom.ind = "point", pointshape = 21, 
+             pointsize = 2, 
+             fill.ind = rownames(pivoted), 
+             col.ind = "black", 
+             palette = "ucscgb", 
+            # addEllipses = TRUE,
+             label = "var",
+             col.var = "black",
+             repel = TRUE,
+             legend.title = "bait") +
+  ggtitle("2D PCA-plot") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+## Condition on raw spectral_count 
+```{r}
+pivoted <- all_data_dicty %>% 
+  group_by(condition) %>%
+  select(uniprot, condition, spectral_count) %>%
+  mutate(row = row_number()) %>%
+  tidyr::pivot_wider(names_from = uniprot, values_from = spectral_count, values_fill = 0) %>%
+  select(-row) %>%
+  summarise_all(funs(sum)) %>%
+  tibble::column_to_rownames(var = "condition")
+  
+
+wdbc.pr <- prcomp(pivoted)
+summary(wdbc.pr)
+
+
+screeplot(wdbc.pr, type = "l", npcs = 6, main = "Screeplot of the first 6 PCs")
+abline(h = 1, col="red", lty=5)
+legend("topright", legend=c("Eigenvalue = 1"),
+       col=c("red"), lty=5, cex=0.6)
+cumpro <- cumsum(wdbc.pr$sdev^2 / sum(wdbc.pr$sdev^2))
+plot(cumpro[0:15], xlab = "PC #", ylab = "Amount of explained variance", main = "Cumulative variance plot")
+
+plot(wdbc.pr$x[,1],wdbc.pr$x[,2], xlab="PC1 (87%)", ylab = "PC2 (11%)", main = "PC1 / PC2 - plot")
+
+library("factoextra")
+fviz_pca_ind(wdbc.pr, geom.ind = "point", pointshape = 21, 
+             pointsize = 2, 
+             fill.ind = rownames(pivoted), 
+             col.ind = "black", 
+             palette = "ucscgb", 
+            # addEllipses = TRUE,
+             label = "var",
+             col.var = "black",
+             repel = TRUE,
+             legend.title = "condition") +
+  ggtitle("2D PCA-plot") +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
 ## Experiment (bait + condition) on raw spectral_count 
 ```{r}
 my_data <- all_data_dicty %>% 
@@ -402,7 +576,6 @@ fviz_pca_ind(wdbc.pr, geom.ind = "point", pointshape = 21,
              legend.title = "bait_condition") +
   ggtitle("2D PCA-plot") +
   theme(plot.title = element_text(hjust = 0.5))
-
 ```
 
 
@@ -411,18 +584,25 @@ fviz_pca_ind(wdbc.pr, geom.ind = "point", pointshape = 21,
 library(igraph)
 library(visNetwork)
 
-my_data <-all_data_dicty %>% group_by(bait, condition) %>% tidyr::unite(bait_condition, c(bait, condition), sep = "_")
-x <- my_data %>% separate(uniprot, c("a", "b", "c", "protid", "genid", "source"), extra = "merge", fill = "left", sep = '[_|]')
-x <- x %>% select(-one_of(c("a", "b", "c")))
+my_data <- all_data_dicty %>% 
+  group_by(bait, condition) %>% 
+  tidyr::unite(bait_condition, c(bait, condition), sep = "_")
+
+x <- my_data %>% 
+  separate(uniprot, c("a", "b", "c", "protid", "genid", "source"), extra = "merge", fill = "left", sep = '[_|]')
+x <- x %>% 
+  select(-one_of(c("a", "b", "c")))
 
 # resulting in 17k+ interactions, hairball!, need to filter
-new_x <- x %>% filter(spectral_count > 200)
+new_x <- x %>% 
+  filter(spectral_count > 200)
 
 nodes <- as.data.frame(unique(new_x$bait_condition))
 nodes$shape = 'triangle'
 colnames(nodes) <- c('id', 'shape')
 
-nodes <- nodes %>% add_row(id = unique(new_x$genid), shape = 'circle')
+nodes <- nodes %>% 
+  add_row(id = unique(new_x$genid), shape = 'circle')
 
 #nodes <- nodes %>% add_row(id = unique(new_x$genid))
 nodes$label <- nodes$id
@@ -450,5 +630,29 @@ visNetwork(nodes = nodes, edges = my_edges) %>%
    degree = list(from = 1, to = 1)), nodesIdSelection = TRUE) %>%
   visPhysics(stabilization = FALSE, barnesHut = ) %>%
   visLayout(improvedLayout = TRUE)
+```
+
+# Demo Viz functions
+```{r}
+# raw data
+plot_spectral_using_bait("Galpha8", 'dicty')
+plot_spectral_using_condition("Normal", 'dicty')
+plot_spectral_bait_condition_using_uniprot('P36415', 'dicty')
+plot_spectral_bait_condition_using_uniprot('GST', 'dicty')
+plot_spectral_bait_condition_using_uniprot('Q54YT4', 'dicty')
+plot_spectral_bait_condition_using_uniprot('GST', 'neutro')
+
+condition_boxplot_spectral_using_bait("Galpha8", 'dicty')
+experiment_boxplot_spectral_using_bait("Galpha8", 'dicty')
+
+
+# normalized data
+#plot_normalized_spectral_using_bait("Galpha8", 'dicty') # we normalized over the total experiments, can we use that to show just bait?
+#plot_normalized_spectral_using_condition("Normal", 'dicty') # same here, plots look funny
+plot_normalized_spectral_bait_condition_using_uniprot('P36415', 'dicty')
+
+#condition_boxplot_normalized_spectral_using_bait("Galpha8", 'dicty') # see above, need to look into, how we normalize and if summation of z-scores is allowed
+experiment_boxplot_normalized_spectral_using_bait("Galpha8", 'dicty')
+
 ```
 
