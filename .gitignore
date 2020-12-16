@@ -43,3 +43,7 @@ docs/
 
 # translation temp files
 po/*~
+
+
+# mac temp file
+.DS_Store
