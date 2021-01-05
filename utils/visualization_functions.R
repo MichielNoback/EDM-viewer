@@ -23,7 +23,7 @@ plot_normalized_spectral_bait_condition_using_uniprot <- function(uniprot_id, wh
   my_data <- filter(get(paste0("all_data_", what)), grepl(uniprot_id, uniprot)) %>% 
     group_by(bait, condition) %>% 
     # .groups = drop is the default, will get warnings if you not specify explicitly 
-    summarise(.groups = 'drop', across(z_score_spectral, sum)) %>% 
+    #summarise(.groups = 'drop', across(z_score_spectral, sum)) %>%  # should take average if we have multiple?
     unite(bait_condition, c(bait, condition), sep = "_")
   
   p <- ggplot(my_data, aes(x = bait_condition, y = z_score_spectral))
