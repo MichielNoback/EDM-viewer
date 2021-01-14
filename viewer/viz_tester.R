@@ -12,5 +12,7 @@ experiment_boxplot_spectral_using_bait("Galpha8", 'dicty')
 
 
 plot_normalized_spectral_bait_condition_using_uniprot('P36415', 'dicty')
+plot_normalized_spectral_bait_condition_using_uniprot('RASC', 'dicty')
+plot_normalized_spectral_bait_condition_using_uniprot('', 'dicty')
 condition_boxplot_normalized_spectral_using_bait("Galpha8", 'dicty')
 experiment_boxplot_normalized_spectral_using_bait("Galpha8", 'dicty')

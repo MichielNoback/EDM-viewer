@@ -651,7 +651,10 @@ experiment_boxplot_spectral_using_bait("Galpha8", 'dicty')
 #plot_normalized_spectral_using_condition("Normal", 'dicty') # same here, plots look funny
 plot_normalized_spectral_bait_condition_using_uniprot('P36415', 'dicty')
 
-#condition_boxplot_normalized_spectral_using_bait("Galpha8", 'dicty') # see above, need to look into, how we normalize and if summation of z-scores is allowed
+plot_normalized_spectral_bait_condition_using_uniprot('RASC', 'dicty')
+
+
+#condition_boxplot_normalized_spectral_using_bait("Galpha8", 'dicty') #
 experiment_boxplot_normalized_spectral_using_bait("Galpha8", 'dicty')
 
 ```
