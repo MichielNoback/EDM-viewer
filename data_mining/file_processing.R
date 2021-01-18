@@ -78,10 +78,10 @@ get_data <- function(what){
     # Z-score normalisation, by group and total, background should be excluded?
     all_data <- all_data %>% 
       group_by(bait, condition) %>% 
-      mutate(grouped_z_score_spectral = scale(corr_spectral_count))
+      mutate(grouped_z_score_spectral = scale(spectral_count))
     
     all_data <- all_data %>% 
-      mutate(z_score_spectral = scale(corr_spectral_count))
+      mutate(z_score_spectral = scale(spectral_count))
 }
 
 
