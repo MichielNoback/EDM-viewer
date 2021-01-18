@@ -19,7 +19,6 @@ library(ggplot2)
 library(RVenn)
 
 # load the data and visualization functions
-source("global.R")
 source("../utils/visualization_functions.R")
 ```
 
@@ -635,27 +634,22 @@ visNetwork(nodes = nodes, edges = my_edges) %>%
 # Demo Viz functions
 ```{r}
 # raw data
-plot_spectral_using_bait("Galpha8", 'dicty')
-plot_spectral_using_condition("Normal", 'dicty')
-plot_spectral_bait_condition_using_uniprot('P36415', 'dicty')
-plot_spectral_bait_condition_using_uniprot('GST', 'dicty')
-plot_spectral_bait_condition_using_uniprot('Q54YT4', 'dicty')
-plot_spectral_bait_condition_using_uniprot('GST', 'neutro')
 
-condition_boxplot_spectral_using_bait("Galpha8", 'dicty')
-experiment_boxplot_spectral_using_bait("Galpha8", 'dicty')
+filter_data_and_plot('dicty', bait_in = 'Galpha8')
+filter_data_and_plot('dicty', condition_in = 'Normal')
+filter_data_and_plot('dicty', uniprot_id = 'GST')
+filter_data_and_plot('dicty', uniprot_id = 'Q54YT4')
+filter_data_and_plot('neutro', uniprot_id = 'GST')
+filter_data_and_plot('dicty', bait_in = 'Galpha8', experiment = TRUE)
 
 
 # normalized data
 #plot_normalized_spectral_using_bait("Galpha8", 'dicty') # we normalized over the total experiments, can we use that to show just bait?
 #plot_normalized_spectral_using_condition("Normal", 'dicty') # same here, plots look funny
-plot_normalized_spectral_bait_condition_using_uniprot('P36415', 'dicty')
+filter_data_and_plot('neutro', uniprot_id = 'P36415', normalized = TRUE)
+filter_data_and_plot('neutro', uniprot_id = 'RASC', normalized = TRUE)
 
-plot_normalized_spectral_bait_condition_using_uniprot('RASC', 'dicty')
-
-
-#condition_boxplot_normalized_spectral_using_bait("Galpha8", 'dicty') #
-experiment_boxplot_normalized_spectral_using_bait("Galpha8", 'dicty')
+filter_data_and_plot('dicty', bait_in = 'Galpha8', experiment = TRUE, viz_type = 'box')
 
 ```
 
