@@ -1,115 +1,59 @@
 source("../data_mining/global.R")
 library(ggplot2) 
 
-# Given a uniprot id and 'dicty' or 'neutro', plot the spectral count vs the bait + condition
-plot_spectral_bait_condition_using_uniprot <- function(uniprot_id, what){
+filter_data_and_plot <- function(celltype, experiment=FALSE, condition_in=NULL, bait_in=NULL, uniprot_id=NULL, normalized=FALSE, viz_type='bar', log_scale=NULL){
   
-  # filter data on substring using grepl, leaves the original uniprot annotation intact 
-  my_data <- filter(get(paste0("all_data_", what)), grepl(uniprot_id, uniprot)) %>% 
-    group_by(bait, condition) %>% 
-    # .groups = drop is the default, will get warnings if you not specify explicitly 
-    summarise(.groups = 'drop', across(spectral_count, sum)) %>% 
-    unite(bait_condition, c(bait, condition), sep = "_")
+  my_data <- NULL
+  my_title <- NULL
+  my_x <- NULL
   
-  p <- ggplot(my_data, aes(x = bait_condition, y = spectral_count))
-  p <- p + geom_col() + labs(title = uniprot_id)
-  p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
-}
-
-# Given a uniprot id and 'dicty' or 'neutro', plot the normalized spectral count vs the bait + condition
-plot_normalized_spectral_bait_condition_using_uniprot <- function(uniprot_id, what){
+  my_y <- if_else(normalized, "z_score_spectral","spectral_count")
+  my_y_label <- if_else(!is.null(log_scale), paste0("log",log_scale, "(", my_y, ")"), my_y)
   
-  # filter data on substring using grepl, leaves the original uniprot annotation intact 
-  my_data <- filter(get(paste0("all_data_", what)), grepl(uniprot_id, uniprot)) %>% 
-    group_by(bait, condition) %>% 
-    # .groups = drop is the default, will get warnings if you not specify explicitly 
-    #summarise(.groups = 'drop', across(z_score_spectral, sum)) %>%  # should take average if we have multiple?
-    unite(bait_condition, c(bait, condition), sep = "_")
+  viz_type <- if_else(viz_type=="bar", "geom_col", "geom_boxplot")
+  viz_function <- get(viz_type, envir=environment(ggplot))
   
-  p <- ggplot(my_data, aes(x = bait_condition, y = z_score_spectral))
-  p <- p + geom_col() + labs(title = uniprot_id)
-  p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
-}
-
-
-
-plot_spectral_using_condition <- function(condition_in, what){
-  
-  my_data <- filter(get(paste0("all_data_", what)), grepl(condition_in, condition))
+  # get count for a given uniprot
+  if (!is.null(uniprot_id) & is.null(condition_in)){
+    my_x <- 'bait_condition'
+    my_title <- uniprot_id
     
-  p <- ggplot(my_data, aes(x = bait, y = spectral_count))
-  p <- p + geom_col() + labs(title = condition_in)
-  p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+    my_data <- filter(get(paste0("all_data_", celltype)), grepl(uniprot_id, uniprot)) %>%
+      group_by(bait, condition) %>%
+      dplyr::summarise(.groups = 'drop', across(my_y, sum)) %>%
+      unite(bait_condition, c(bait, condition), sep = "_")
+  }
+  # get count for a given condition
+  else if (!is.null(condition_in)){
+    my_x <- 'bait'
+    my_title <- condition_in
+    
+    my_data <- filter(get(paste0("all_data_", celltype)), grepl(condition_in, condition))
+  }
+  # get count for a given bait
+  else if (!is.null(bait_in) & !experiment){
+    my_x <- 'condition'
+    my_title <- bait_in
+    
+    my_data <- filter(get(paste0("all_data_", celltype)), grepl(bait_in, bait))
+  # get count for a given bait per experiment (bait_condition)
+  }else if (experiment){
+    my_title <- bait_in
+    my_x <- 'bait_condition'
+    
+    my_data <- filter(get(paste0("all_data_", celltype)), grepl(bait_in, bait)) %>%
+      group_by(bait, condition) %>% 
+      tidyr::unite(bait_condition, c(bait, condition), sep = "_")
+  }
+  
+  # should the data be log transformed
+  my_data[my_y] <- ifelse(!is.null(log_scale), log(my_data[my_y], base = log_scale), my_data[my_y])
+  
+  p <- ggplot(my_data, aes_string(x = my_x, y =my_y)) + 
+    viz_function() + labs(title = my_title) + 
+    ylab(my_y_label) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  print(p)
+  
+  my_data
 }
-
-
-plot_normalized_spectral_using_condition <- function(condition_in, what){
-  
-  my_data <- filter(get(paste0("all_data_", what)), grepl(condition_in, condition))
-  
-  p <- ggplot(my_data, aes(x = bait, y = z_score_spectral))
-  p <- p + geom_col() + labs(title = condition_in)
-  p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
-}
-
-
-plot_spectral_using_bait <- function(bait_in, what){
-  
-  my_data <- filter(get(paste0("all_data_", what)), grepl(bait_in, bait))
-  
-  p <- ggplot(my_data, aes(x = condition, y = spectral_count))
-  p <- p + geom_col() + labs(title = bait_in)
-  p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
-}
-
-plot_normalized_spectral_using_bait <- function(bait_in, what){
-  
-  my_data <- filter(get(paste0("all_data_", what)), grepl(bait_in, bait))
-  
-  p <- ggplot(my_data, aes(x = condition, y = z_score_spectral))
-  p <- p + geom_col() + labs(title = bait_in)
-  p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
-}
-
-
-condition_boxplot_spectral_using_bait <- function(bait_in, what){
-  my_data <- filter(get(paste0("all_data_", what)), grepl(bait_in, bait))
-  
-  p <- ggplot(my_data, aes(x = condition, y = log10(spectral_count)))
-  p <- p + geom_boxplot() + labs(title = bait_in) 
-
-  p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
-}
-
-condition_boxplot_normalized_spectral_using_bait <- function(bait_in, what){
-  my_data <- filter(get(paste0("all_data_", what)), grepl(bait_in, bait))
-  
-  p <- ggplot(my_data, aes(x = condition, y = log2(z_score_spectral)))
-  p <- p + geom_boxplot() + labs(title = bait_in) 
-  
-  p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
-}
-
-experiment_boxplot_spectral_using_bait <- function(bait_in, what){
-  
-  my_data <- filter(get(paste0("all_data_", what)), grepl(bait_in, bait)) %>%
-  group_by(bait, condition) %>% 
-    tidyr::unite(bait_condition, c(bait, condition), sep = "_")
-  
-  p <- ggplot(my_data, aes(x = bait_condition, y = log10(spectral_count)))
-  p <- p + geom_boxplot() + labs(title = bait_in) 
-  
-  p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
-}
-
-experiment_boxplot_normalized_spectral_using_bait <- function(bait_in, what){
-  my_data <- filter(get(paste0("all_data_", what)), grepl(bait_in, bait)) %>%
-    group_by(bait, condition) %>% 
-    tidyr::unite(bait_condition, c(bait, condition), sep = "_")
-  
-  p <- ggplot(my_data, aes(x = bait_condition, y = log2(z_score_spectral)))
-  p <- p + geom_boxplot() + labs(title = bait_in) 
-  
-  p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
-}
-
