@@ -1,4 +1,4 @@
-source("../data_mining/global.R")
+source("../data_mining/file_processing.R")
 library(ggplot2) 
 
 filter_data_and_plot <- function(celltype, experiment=FALSE, condition_in=NULL, bait_in=NULL, uniprot_id=NULL, normalized=FALSE, viz_type='bar', log_scale=NULL){
