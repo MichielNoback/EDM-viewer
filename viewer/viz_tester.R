@@ -1,32 +1,29 @@
 source('../utils/visualization_functions.R')
 
 
-# test uniprot + non normal
-vis_testing <- filter_data_and_plot(celltype = 'dicty', uniprot_id = 'GST', normalized = FALSE)
-# test uniprot + normal
-vis_testing <- filter_data_and_plot(celltype = 'dicty', uniprot_id = 'GST', normalized = TRUE)
+# barplot over experiments based on summed counts for a given uniprot
+vis_testing <- filter_data(celltype = 'dicty', uniprot_id = 'GST', experiment_bool = TRUE)
+EDM_plot(my_data = vis_testing)
 
-# test condition + normal
-vis_testing <- filter_data_and_plot(celltype = 'dicty', condition = 'Normal', normalized = TRUE)
+# barplot over baits based on summed counts for a given condition
+vis_testing <- filter_data(celltype = 'dicty', condition_in = 'Normal', bait_bool = TRUE)
+EDM_plot(my_data = vis_testing)
 
-# test condition + non normal
-vis_testing <- filter_data_and_plot(celltype = 'dicty', condition = 'Normal', normalized = FALSE)
+# barplot over condition based on summed counts for a given bait
+vis_testing <- filter_data(celltype = 'dicty', bait_in = 'Galpha8', condition_bool = TRUE)
+EDM_plot(my_data = vis_testing)
 
-# test bait + normal
-vis_testing <- filter_data_and_plot(celltype = 'dicty', bait_in = 'Galpha8', normalized = TRUE)
+# boxplot over condition based on summed counts for a given bait
+EDM_plot(my_data = vis_testing, viz_type = 'box')
 
-# test bait + non normal
-vis_testing <- filter_data_and_plot(celltype = 'dicty', bait_in = 'Galpha8', normalized = FALSE)
+# boxplot over condition based on summed counts for a given bait + log scaling
+EDM_plot(my_data = vis_testing, viz_type = 'box', log_scale = 10)
 
-# test condition + boxplot  
-vis_testing <- filter_data_and_plot(celltype = 'dicty', bait_in = 'Galpha8', normalized = FALSE, viz_type = 'box')
+# barplot over condition based on summed counted for a given bait
+vis_testing <- filter_data(celltype = 'dicty', bait_in = 'Galpha8', normalized = TRUE, condition_bool = TRUE)
+EDM_plot(my_data = vis_testing)
 
-# test condition + boxplot + log scaling
-vis_testing <- filter_data_and_plot(celltype = 'dicty', bait = 'Galpha8', normalized = FALSE, viz_type = 'box', log_scale = 10)
-
-# test condition + boxplot + log scaling + normalized
-vis_testing <- filter_data_and_plot(celltype = 'dicty', bait = 'Galpha8', normalized = TRUE, viz_type = 'box', log_scale = 10)
-
-# test condition + boxplot + log scaling + normalized
-vis_testing <- filter_data_and_plot(celltype = 'dicty', experiment = TRUE, bait = 'Galpha8', normalized = FALSE, viz_type = 'box', log_scale = 10)
+# boxplot counts over experiments for a given bait + log scaling + normalized
+vis_testing <- filter_data(celltype = 'dicty', bait_in = 'Galpha8', normalized = FALSE, experiment = TRUE)
+EDM_plot(my_data = vis_testing, viz_type = 'box', log_scale = 10)
 
