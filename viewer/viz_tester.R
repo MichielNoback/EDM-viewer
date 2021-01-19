@@ -2,7 +2,7 @@ source('../utils/visualization_functions.R')
 
 
 # barplot over experiments based on summed counts for a given uniprot
-vis_testing <- filter_data(celltype = 'dicty', uniprot_in = 'GST', experiment_bool = TRUE)
+vis_testing <- filter_data(celltype = 'dicty', uniprot_in= 'GST', experiment_bool = TRUE)
 EDM_plot(my_data = vis_testing)
 
 # barplot over baits based on summed counts for a given condition
