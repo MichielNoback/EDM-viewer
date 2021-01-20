@@ -1,5 +1,3 @@
-source("../data_mining/data_processing.R")
-
 library(ggplot2) 
 
 # function to plot (bar or box), for the filtered data

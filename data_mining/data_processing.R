@@ -34,9 +34,31 @@ my_files_dicty <- c(
   'Chemotaxis_Dicty_Galpha2_veg.txt'
 )
 
+# function to read exported unique protein count file from scaffold
+# exported with the exported all option, otherwise the same file will contain 
+# many meta information lines
+get_data <- function(){
+  
+  spdat <- read_delim(paste0(data_dir, "overview_unique_peptide_counts_MISSING_GALPHA_GDP_and_GTP.csv"), col_names=T, delim="\t", skip=2)
+  
+  spdat <- spdat %>% select(!c(1,2,3,6,9)) %>%
+    rename('long_id' = `Identified Proteins (2302)`, 
+           'uniprot' = `Accession Number`,
+           'mw' = `Molecular Weight`,
+           'is_grouping' = `Protein Grouping Ambiguity`) %>%
+    pivot_longer(!c(long_id, uniprot, mw, is_grouping), 
+                 names_to = c("bait", "condition"), 
+                 names_sep = "_", 
+                 values_to = "spectral_count") %>%
+    mutate(across(c(bait, condition), as.factor)) %>%
+    mutate(z_score_spectral = scale(spectral_count))
+}
 
+
+
+# obsolete funtion!, used for the separate txt files with counts for each experiment
 # read raw data, pass: 'dicty' or 'neutro' as argument
-get_data <- function(what){
+get_data_old <- function(what){
   data_list <- list()
   
   for (file_name in get(paste0("my_files_", what))){
@@ -86,8 +108,8 @@ get_data <- function(what){
 
 
 # get the data
-all_data_dicty <- get_data('dicty')
-all_data_neutro <- get_data('neutro')
+all_data_dicty <- get_data()
+# all_data_neutro <- get_data_old('neutro')
 
 
 filter_data <- function(celltype, experiment_bool=FALSE, bait_bool=FALSE, condition_bool=FALSE, condition_in=NULL, bait_in=NULL, uniprot_in=NULL, normalized=FALSE){
