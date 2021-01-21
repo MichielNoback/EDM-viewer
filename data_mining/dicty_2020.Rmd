@@ -19,7 +19,7 @@ library(ggplot2)
 library(RVenn)
 
 # load the data and visualization functions
-source("global.R")
+source("data_processing.R")
 source("../utils/visualization_functions.R")
 ```
 
@@ -595,7 +595,7 @@ x <- x %>%
 
 # resulting in 17k+ interactions, hairball!, need to filter
 new_x <- x %>% 
-  filter(spectral_count > 200)
+  filter(spectral_count > 30)
 
 nodes <- as.data.frame(unique(new_x$bait_condition))
 nodes$shape = 'triangle'
@@ -635,24 +635,45 @@ visNetwork(nodes = nodes, edges = my_edges) %>%
 # Demo Viz functions
 ```{r}
 # raw data
-plot_spectral_using_bait("Galpha8", 'dicty')
-plot_spectral_using_condition("Normal", 'dicty')
-plot_spectral_bait_condition_using_uniprot('P36415', 'dicty')
-plot_spectral_bait_condition_using_uniprot('GST', 'dicty')
-plot_spectral_bait_condition_using_uniprot('Q54YT4', 'dicty')
-plot_spectral_bait_condition_using_uniprot('GST', 'neutro')
+viz_testing <- filter_data(celltype = 'dicty', bait_in = 'Galpha8', experiment_bool = TRUE)
+EDM_plot(my_data = viz_testing)
 
-condition_boxplot_spectral_using_bait("Galpha8", 'dicty')
-experiment_boxplot_spectral_using_bait("Galpha8", 'dicty')
+<<<<<<< Updated upstream
+vis_testing <- filter_data(celltype = 'dicty', bait_in= 'Galpha8', experiment_bool = TRUE)
+EDM_plot(my_data = vis_testing)
+
+vis_testing <- filter_data(celltype = 'dicty', condition_in= 'Normal', bait_bool = TRUE)
+EDM_plot(my_data = vis_testing)
 
 
-# normalized data
-#plot_normalized_spectral_using_bait("Galpha8", 'dicty') # we normalized over the total experiments, can we use that to show just bait?
-#plot_normalized_spectral_using_condition("Normal", 'dicty') # same here, plots look funny
-plot_normalized_spectral_bait_condition_using_uniprot('P36415', 'dicty')
+vis_testing <- filter_data(celltype = 'dicty', uniprot_in= 'GST', experiment_bool = TRUE)
+EDM_plot(my_data = vis_testing)
 
-#condition_boxplot_normalized_spectral_using_bait("Galpha8", 'dicty') # see above, need to look into, how we normalize and if summation of z-scores is allowed
-experiment_boxplot_normalized_spectral_using_bait("Galpha8", 'dicty')
+
+vis_testing <- filter_data(celltype = 'dicty', uniprot_in= 'Q54YT4', experiment_bool = TRUE)
+EDM_plot(my_data = vis_testing)
+
+vis_testing <- filter_data(celltype = 'neutro', uniprot_in= 'GST', experiment_bool = TRUE)
+EDM_plot(my_data = vis_testing)
+
+
+vis_testing <- filter_data(celltype = 'dicty', bait_in= 'Galpha8', experiment_bool = TRUE)
+EDM_plot(my_data = vis_testing, viz_type = 'box', log_scale = 2)
+=======
+viz_testing <- filter_data(celltype = 'dicty', condition_in = 'Normal', bait_bool = TRUE)
+EDM_plot(my_data = viz_testing)
+
+viz_testing <- filter_data(celltype = 'dicty', uniprot_in = 'GST', experiment_bool = TRUE)
+EDM_plot(my_data = viz_testing)
+
+viz_testing <- filter_data(celltype = 'dicty', uniprot_in = 'Q54YT4', experiment_bool = TRUE)
+EDM_plot(my_data = viz_testing)
+
+viz_testing <- filter_data(celltype = 'dicty', bait_in = 'Galpha8', experiment_bool = TRUE)
+EDM_plot(my_data = viz_testing, viz_type = 'box', log_scale = 2)
+
+
+>>>>>>> Stashed changes
 
 ```
 

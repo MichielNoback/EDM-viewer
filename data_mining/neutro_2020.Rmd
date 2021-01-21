@@ -16,15 +16,14 @@ library(ggplot2)
 library(RVenn)
 
 # load the data and visualization functions
-source("global.R")
+source("data_processing.R")
 source("../utils/visualization_functions.R")
 ```
 
 Normalised spectral count per group and total, add columns to dataframe
 ```{r}
 # Z-score normalisation, by group and total
-all_data_neutro <- all_data_neutro %>% group_by(bait, condition) %>% mutate(grouped_z_score_spectral = scale(spectral_count))
-all_data_neutro <- all_data_neutro %>% mutate(z_score_spectral = scale(spectral_count))
+
 ```
 
 
@@ -36,8 +35,6 @@ table(all_data_neutro$condition)
 
 
 ```{r}
-plot_spectral_bait_condition_using_uniprot('P36415', 'neutro')
-plot_spectral_bait_condition_using_uniprot('GST', 'neutro')
-plot_spectral_bait_condition_using_uniprot('Q54YT4', 'neutro')
+
 ```
 
