@@ -1,15 +1,29 @@
-source("./global.R")
+histogramUI <- function(id) {
+  tagList(
+    selectInput(NS(id, "var"), "Variable", names(mtcars)),
+    numericInput(NS(id, "bins"), "bins", 10, min = 1),
+    plotOutput(NS(id, "hist"))
+  )
+}
 
-conditions <- get_conditions_vector("dicty")
+histogramServer <- function(id) {
+  moduleServer(id, function(input, output, session) {
+    data <- reactive(mtcars[[input$var]])
+    output$hist <- renderPlot({
+      hist(data(), breaks = input$bins, main = input$var)
+    }, res = 96)
+  })
+}
 
+histogramApp <- function() {
+  ui <- fluidPage(
+    histogramUI("hist1")
+  )
+  server <- function(input, output, session) {
+    histogramServer("hist1")
+  }
+  shinyApp(ui, server)  
+}
 
-all_data %>% 
-    filter(Condition %in% conditions[sample.int(length(conditions), 3)]) %>%
-    mutate(signal_log2 = log2(signal)) %>%
-    ggplot(mapping = aes(x = Condition, y = signal_log2, color = Condition)) +
-        geom_boxplot() +
-        ylab("Log2 of the signal") +
-        theme(legend.position = "none")
-
-
+shinyApp(ui, server)
 

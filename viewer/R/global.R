@@ -2,6 +2,7 @@ library(shiny)
 library(dplyr)
 library(ggplot2)
 library(readr)
+library(here)
 
 ## UTILITY FUNCTIONS ##
 
@@ -11,20 +12,27 @@ get_celltypes <- function() {
 
 ## Reads the primary data, given a celltype
 read_primary <- function(celltype) {
-    read_delim(file = paste0("./data/all_data_", celltype, ".txt"),
+    read_delim(file = paste0(here(), "/data/all_data_", celltype, ".txt"),
                delim = "\t+",
-               col_names = c("long_ID", "short_ID", "weight", "flag", "signal", "Condition"))
+               col_types = c("ccdliff"))
 }
+# read_primary <- function(celltype) {
+#     read_delim(file = paste0(here(), "/data/all_data_", celltype, ".txt"),
+#                delim = "\t+",
+#                col_names = c("long_ID", "short_ID", "weight", "flag", "signal", "Condition"))
+# }
+
 
 ## Prepares all data for the app
 prepare_data <- function() {
     all_data <- tibble(
-        long_ID = character(),
-        short_ID = character(),
-        weight = character(),
-        flag = logical(),
-        signal = integer(),
-        Condition = factor(),
+        long_id = character(),
+        uniprot = character(),
+        mw = double(),
+        is_grouping = logical(),
+        spectral_count = integer(),
+        bait = factor(),
+        condition = factor(),
         source = factor()
     )
     for (celltype in get_celltypes()) {
@@ -32,13 +40,8 @@ prepare_data <- function() {
         tmp$source <- celltype
         all_data <- bind_rows(all_data, tmp)
     }
-    # neutro <- read_primary(celltype = "neutro")
-    # neutro$source <- "neutro"
-
-    # all_data <- bind_rows(dicty, neutro)
     all_data
 }
-
 
 ## LOAD THE DATA ##
 all_data <- prepare_data()
