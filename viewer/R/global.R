@@ -4,24 +4,20 @@ library(ggplot2)
 library(readr)
 library(here)
 
-## UTILITY FUNCTIONS ##
+## DATA LOADING ##
 
 get_celltypes <- function() {
-    c("dicty", "neutro")
+    #c("dicty", "neutro")
+    c("dicty")
 }
 
 ## Reads the primary data, given a celltype
+##long_id	uniprot	mw	is_grouping	spectral_count	bait	condition	z_score_spectral
 read_primary <- function(celltype) {
     read_delim(file = paste0(here(), "/data/all_data_", celltype, ".txt"),
                delim = "\t+",
-               col_types = c("ccdliff"))
+               col_types = c("ccdliffd"))
 }
-# read_primary <- function(celltype) {
-#     read_delim(file = paste0(here(), "/data/all_data_", celltype, ".txt"),
-#                delim = "\t+",
-#                col_names = c("long_ID", "short_ID", "weight", "flag", "signal", "Condition"))
-# }
-
 
 ## Prepares all data for the app
 prepare_data <- function() {
@@ -33,7 +29,8 @@ prepare_data <- function() {
         spectral_count = integer(),
         bait = factor(),
         condition = factor(),
-        source = factor()
+        source = factor(),
+        z_score_spectral = double()
     )
     for (celltype in get_celltypes()) {
         tmp <- read_primary(celltype)
@@ -47,26 +44,29 @@ prepare_data <- function() {
 all_data <- prepare_data()
 
 
+## UTILITY FUNCTIONS ##
+
+
 ## DEDICATED UTILITY FUNCTIONS OPERATING ON MAIN DATASET ##
 
 ## Returns a vector of all Conditions present in the dataset
 get_conditions_vector <- function(celltypes) {
     tmp <- all_data %>%
         filter(source %in% celltypes) %>%
-        select(Condition) %>% 
+        select(condition) %>% 
         unique() %>% 
-        pull(Condition) #vectorized instead of tibble
-    names(tmp) <- tmp
+        pull(condition) #vectorized instead of tibble
+#    names(tmp) <- tmp
     sort(tmp)
 }
 
 ## Returns a vector of all genes present in the dataset
-get_genes_vector <- function(celltypes) {
-    tmp_tbl <- all_data %>%
+get_genes_vector <- function(celltypes = get_celltypes()) {
+    tmp <- all_data %>%
         filter(source %in% celltypes) %>%
-        select(long_ID, short_ID)
-    tmp <- pull(tmp_tbl, long_ID)
-    names(tmp) <- pull(tmp_tbl, short_ID)
-    tmp
+        select(long_id, uniprot)
+    tmp_v <- pull(tmp, long_id)
+    names(tmp_v) <- tmp$uniprot
+    tmp_v
 }
 

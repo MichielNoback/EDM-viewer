@@ -25,5 +25,19 @@ histogramApp <- function() {
   shinyApp(ui, server)  
 }
 
+#ff checke
+
+#all_data %>% ggplot(mapping = aes(x = z_score_spectral)) + geom_histogram(aes(y =..density..), binwidth = 2)
+
+# cutoff <- 2
+# all_data %>% 
+#     mutate(z_label = cut(z_score_spectral, 
+#                          breaks = c(-Inf, -cutoff, cutoff, Inf), 
+#                          labels = c("low_z", "unchanged", "high_z"))) %>%
+#     select(z_label) %>%
+#     table()
+
+
+
 shinyApp(ui, server)
 

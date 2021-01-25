@@ -6,11 +6,38 @@
 # studenten: fair data viewer voor data collectie
 #
 
-server <- function(input, output) { 
+server <- function(input, output, session) { 
     gene_name <- reactive({
-        req(input$gene_id)
-        substr(input$gene_id, 1, 9)
-        #"tr|B4E2X5|B4E2X5_HUMAN"
+        req(input$gene_select)
+        input$gene_select
     })
+    
+    gene_celltype <- reactive({
+        req(input$celltypes_for_genes)
+        input$celltypes_for_genes
+    })
+    
+    
+    observe({
+        req(input$celltypes_for_genes)
+            updateSelectizeInput(session = session, 
+                         inputId = "gene_select", 
+                         choices = get_genes_vector(input$celltypes_for_genes), 
+                         server = TRUE)
+    })
+    ##genes reactive; depends on choice of cell type
+    # genes <- reactive({
+    #     #cell_types <- input$cell_types
+    #     cell_types <- c("dicty")
+    #     if (is.null(input$cell_types)) {
+    #         genes_vector <- ""
+    #         names(genes_vector) <- "select celltype"
+    #     } else {
+    #         genes_vector <- get_genes_vector(cell_types)
+    #     }
+    #     return(genes_vector)
+    # })
+    
+    
     output$gene_name <- renderText(gene_name())
 }
