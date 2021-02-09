@@ -1,43 +1,62 @@
-histogramUI <- function(id) {
-  tagList(
-    selectInput(NS(id, "var"), "Variable", names(mtcars)),
-    numericInput(NS(id, "bins"), "bins", 10, min = 1),
-    plotOutput(NS(id, "hist"))
-  )
+
+library(DT)
+source("R/plotting_functions.R")
+
+
+ui <- fluidPage(
+    titlePanel("Hello Shiny!"),
+    sidebarLayout(
+        sidebarPanel(
+            textInput(inputId = "gene_search",
+                      label = "Find gene(s)",
+                      ),
+            dataTableOutput(outputId = "suggested_genes")
+
+        ),
+        mainPanel(
+            dataTableOutput(outputId = "selected_genes"),
+            plotOutput(outputId = "gene_conditions_bar")
+        )
+    )
+)
+
+server <- function(input, output) {
+    #the gene being searched, as it is typed
+    gene_search <- reactive({
+        req(input$gene_search)
+        input$gene_search
+    })
+    
+    # the tibble with matching entries from the all_data dataset
+    matching_genes <- reactive({
+        get_matching_genes_for_long_id_or_uniprot(gene_search())
+    })
+    
+    # observes selected entries in the matching genes
+    observe({
+        req(input$suggested_genes_rows_selected)
+        selection <- matching_genes()[input$suggested_genes_rows_selected[1], "uniprot"]
+        selection <- pull(selection, uniprot)
+        print(paste0("[server] selection: ", selection))
+        selected_table <- get_gene_conditions_table(selection)
+        #print("selected table:")
+        #print(selected_table)
+
+        output$gene_conditions_bar <- renderPlot({
+            plot_bargraph_for_gene(selected_table)
+        })
+        
+        output$selected_genes <- DT::renderDataTable({
+            DT::datatable(matching_genes()[input$suggested_genes_rows_selected, ])
+        })
+    })
+    
+    # shows the matching_genes tibble to select from
+    output$suggested_genes <- DT::renderDataTable({
+        DT::datatable(matching_genes(),
+                      options = list(dom = 't'))
+    })
+
 }
-
-histogramServer <- function(id) {
-  moduleServer(id, function(input, output, session) {
-    data <- reactive(mtcars[[input$var]])
-    output$hist <- renderPlot({
-      hist(data(), breaks = input$bins, main = input$var)
-    }, res = 96)
-  })
-}
-
-histogramApp <- function() {
-  ui <- fluidPage(
-    histogramUI("hist1")
-  )
-  server <- function(input, output, session) {
-    histogramServer("hist1")
-  }
-  shinyApp(ui, server)  
-}
-
-#ff checke
-
-#all_data %>% ggplot(mapping = aes(x = z_score_spectral)) + geom_histogram(aes(y =..density..), binwidth = 2)
-
-# cutoff <- 2
-# all_data %>% 
-#     mutate(z_label = cut(z_score_spectral, 
-#                          breaks = c(-Inf, -cutoff, cutoff, Inf), 
-#                          labels = c("low_z", "unchanged", "high_z"))) %>%
-#     select(z_label) %>%
-#     table()
-
-
 
 shinyApp(ui, server)
-
