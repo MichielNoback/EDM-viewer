@@ -121,6 +121,21 @@ all_data_dicty <- get_data()
 # all_data_neutro <- get_data_old('neutro')
 
 
+# Add annotation to raw data, this will add the following columns: 
+# uniprot_short
+# Organism
+# Protein.names
+# Gene.names
+# Gene.ontology..biological.process
+# Gene.ontology..molecular.function
+# Gene.ontology..cellular.component
+all_data_dicty$uniprot_short <- get_uniprot(all_data_dicty$uniprot)
+load(file = "dicty_annotated.Rdata")
+dicty_annotated$uniprot_short <- rownames(dicty_annotated)
+all_data_dicty <- all_data_dicty %>% left_join(dicty_annotated, by = c("uniprot_short"))
+
+
+
 #' Filter the celltype data based on several conditions which can be set using the arguments
 #' @param celltype raw data from the get_data() function
 #' @param experiment_bool boolean (default FALSE)
@@ -206,8 +221,10 @@ get_uniprot <- function(ids){
   x <- x %>% 
     select(-one_of(c("a", "b", "c")))
   
-  Accessions <- as.vector(na.omit(x$protid))
+  #Accessions <- as.vector(na.omit(x$protid))
+  Accessions <- as.vector(x$protid)
   Accessions <- unlist(Accessions, use.names=FALSE)
+  Accessions <- replace_na(Accessions, "GST")
   Accessions
 }
 
