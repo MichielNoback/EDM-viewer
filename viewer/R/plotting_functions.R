@@ -14,6 +14,10 @@ library(tidyr)
 #' print(plot_bargraph_for_gene(get_gene_conditions_table("sp|P0A6M8|EFG_ECOLI")))
 #' print(plot_bargraph_for_gene(get_gene_conditions_table("sp|P02887|DIS1B_DICDI")))
 plot_bargraph_for_gene <- function(gene_data) {
+    if(is.null(gene_data) || nrow(gene_data) == 0) {
+        message("returning NULL")
+        return(NULL)
+    }
     #print(gene_data)
     ##define local vars
     plot_margins <- c(0.5, 0.5, 0.5, 1)
@@ -30,7 +34,8 @@ plot_bargraph_for_gene <- function(gene_data) {
                         mapping = aes(x = cond_bait, 
                                       y = spectral_count, 
                                       fill = name)) +
-        geom_bar(stat = "identity", position = position_dodge2(width = 0.9, preserve = "single")) +
+        geom_bar(stat = "identity", 
+                 position = position_dodge2(width = 0.9, preserve = "single")) +
         ylab("spectral count") +
         theme_minimal() +
         theme(axis.text.x = element_text(angle = 60, hjust = 1),
@@ -46,7 +51,8 @@ plot_bargraph_for_gene <- function(gene_data) {
         geom_rect(aes(xmin = -Inf, xmax = Inf, ymin = -2.0, ymax = 2.0),
             alpha = 0.01,
             fill = "red") +
-        geom_bar(stat = "identity", position = position_dodge2(width = 0.9, preserve = "single")) +
+        geom_bar(stat = "identity", 
+                 position = position_dodge2(width = 0.9, preserve = "single")) +
         ylab("z-score") +
         theme_minimal() +
         theme(axis.text.x = element_text(angle = 60, hjust = 1),
