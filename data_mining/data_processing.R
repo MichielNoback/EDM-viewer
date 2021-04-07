@@ -1,7 +1,7 @@
 library(dplyr)
 library(readr)
 library(tidyr)
-library(stringr) 
+library(stringr)
 
 data_dir <- '../data/'
 
@@ -34,9 +34,15 @@ my_files_dicty <- c(
   'Chemotaxis_Dicty_Galpha2_veg.txt'
 )
 
-# function to read exported unique protein count file from scaffold
-# exported with the exported all option, otherwise the same file will contain 
-# many meta information lines
+
+#' read exported unique protein count file from scaffold
+#' exported with the exported all option, otherwise the same file will contain 
+#' many meta information lines
+#' @return spdat list 
+#' [1] "long_id"          "uniprot"          "mw"               "is_grouping"      "bait"            
+#' [6] "condition"        "spectral_count"   "z_score_spectral"
+#' @example
+#' all_data_dicty <- get_data()
 get_data <- function(){
   
   spdat <- read_delim(paste0(data_dir, "overview_unique_peptide_counts_MISSING_GALPHA_GDP_and_GTP.csv"), col_names=T, delim="\t", skip=2)
@@ -51,7 +57,10 @@ get_data <- function(){
                  names_sep = "_", 
                  values_to = "spectral_count") %>%
     mutate(across(c(bait, condition), as.factor)) %>%
+    #mutate(z_score_spectral = scale(spectral_count)) %>%
+    group_by(bait, condition) %>% 
     mutate(z_score_spectral = scale(spectral_count))
+  
 }
 
 
@@ -112,6 +121,31 @@ all_data_dicty <- get_data()
 # all_data_neutro <- get_data_old('neutro')
 
 
+# Add annotation to raw data, this will add the following columns: 
+# uniprot_short
+# Organism
+# Protein.names
+# Gene.names
+# Gene.ontology..biological.process
+# Gene.ontology..molecular.function
+# Gene.ontology..cellular.component
+all_data_dicty$uniprot_short <- get_uniprot(all_data_dicty$uniprot)
+load(file = "dicty_annotated.Rdata")
+dicty_annotated$uniprot_short <- rownames(dicty_annotated)
+all_data_dicty <- all_data_dicty %>% left_join(dicty_annotated, by = c("uniprot_short"))
+
+
+
+#' Filter the celltype data based on several conditions which can be set using the arguments
+#' @param celltype raw data from the get_data() function
+#' @param experiment_bool boolean (default FALSE)
+#' @param bait_bool boolean (default FALSE)
+#' @param condition_bool (default FALSE)
+#' @param condition_in character (default NULL)
+#' @param bait_in character (default NULL)
+#' @param uniprot_in character (default NULL)
+#' @param normalized boolean (default FALSE)
+#' @return list with filtered data and graphing labels (Title, x and y-axis)
 filter_data <- function(celltype, experiment_bool=FALSE, bait_bool=FALSE, condition_bool=FALSE, condition_in=NULL, bait_in=NULL, uniprot_in=NULL, normalized=FALSE){
   
   my_data <- NULL
@@ -166,9 +200,38 @@ filter_data <- function(celltype, experiment_bool=FALSE, bait_bool=FALSE, condit
   my_data_fig_labels$y_label <- my_y
   
   return(list(count_data = my_data, fig_labels = my_data_fig_labels))
+}
+
+
+#' convert uniprot ids to accession numbers
+#' 
+#' @param ids character vector with long uniprot identifiers
+#' i.e. "sp|P27133|CORO_DICDI"
+#' @return Accessions character vector -> "P27133"
+#' @example 
+#' overlapping_ids <- visualization_functions::show_overlapping_peptides_ROCO4_Background_corrected(my_dicty_data = all_data_dicty, bait1 = 'Galpha2', bait2 = 'Galpha4', bait3 = 'Galpha8', z_threshold = 1, scaled = TRUE)
+#' get_uniprot(overlapping_ids$Galpha2_Galpha4)
+get_uniprot <- function(ids){
+
+  my_data <- as.data.frame(ids)
+  colnames(my_data) <- 'uniprot'
   
+  x <- my_data %>% 
+    separate(uniprot, c("a", "b", "c", "protid", "genid", "source"), extra = "merge", fill = "left", sep = '[_|]')
+  x <- x %>% 
+    select(-one_of(c("a", "b", "c")))
+  
+  #Accessions <- as.vector(na.omit(x$protid))
+  Accessions <- as.vector(x$protid)
+  Accessions <- unlist(Accessions, use.names=FALSE)
+  Accessions <- replace_na(Accessions, "GST")
+  Accessions
 }
 
 
 #write.table(all_data_dicty , file = "all_data_dicty.txt", row.names = FALSE, quote = FALSE, sep = '\t')
 #write.table(all_data_neutro , file = "all_data_neutro.txt", row.names = FALSE, quote = FALSE, sep = '\t')
+
+
+
+
