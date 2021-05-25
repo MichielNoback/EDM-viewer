@@ -1,7 +1,7 @@
-library(ggplot2)
-library(gridExtra)
-library(dplyr)
-library(tidyr)
+suppressMessages(library(ggplot2))
+suppressMessages(library(gridExtra))
+suppressMessages(library(dplyr))
+suppressMessages(library(tidyr))
 
 #' Create bar graphs for spectral count and its z-score
 #' 
@@ -11,71 +11,133 @@ library(tidyr)
 #' @param gene_data a tibble containing all measurements for a single gene
 #' @return a ggplot2 object
 #' @examples 
-#' print(plot_bargraph_for_gene(get_gene_conditions_table("sp|P0A6M8|EFG_ECOLI")))
-#' print(plot_bargraph_for_gene(get_gene_conditions_table("sp|P02887|DIS1B_DICDI")))
-plot_bargraph_for_gene <- function(gene_data) {
+#' print(plot_bargraph_for_gene(get_gene_data_for_uniprots("sp|P0A6M8|EFG_ECOLI")))
+#' print(plot_bargraph_for_gene(get_gene_data_for_uniprots("sp|P02887|DIS1B_DICDI")))
+plot_bargraph_for_genes <- function(gene_data, 
+                                   experiments = "all",
+                                   normalized_input_values = TRUE,
+                                   faceted = FALSE) {
     if(is.null(gene_data) || nrow(gene_data) == 0) {
         message("returning NULL")
         return(NULL)
     }
-    #print(gene_data)
-    ##define local vars
-    plot_margins <- c(0.5, 0.5, 0.5, 1)
-    caption <- paste(strwrap("Shaded area indicates z-score=2 boundary of 95%", 40),
-                     collapse = "\n")
-    
+
     ##process input data
     tmp <- gene_data %>% 
-        #arrange(condition, bait) %>%
         unite(cond_bait, condition, bait, sep = " / ")
     
-    ##create barplot of count data
-    count_plt <- ggplot(data = tmp,
-                        mapping = aes(x = cond_bait, 
-                                      y = spectral_count, 
-                                      fill = name)) +
-        geom_bar(stat = "identity", 
-                 position = position_dodge2(width = 0.9, preserve = "single")) +
-        ylab("spectral count") +
-        theme_minimal() +
-        theme(axis.text.x = element_text(angle = 60, hjust = 1),
-              axis.title.x = element_blank(),
-              legend.position = "none",
-              plot.margin = unit(plot_margins, "cm"))
+    if(! experiments[1] == "all") {
+        #print("filtering")
+        tmp <- tmp %>% filter(cond_bait %in% experiments)
+    }
 
-    ##create barplot of z-score data
-    zscore_plt <- ggplot(data = tmp,
-                        mapping = aes(x = cond_bait, 
+    if (faceted) {
+        plot_faceted_bargraph_for_genes(tmp, normalized_input_values)
+    } else {
+        plot_side_by_side_barplot_for_genes(tmp, normalized_input_values)
+    }
+    
+
+    ## arrange and return
+    # plot_layout <- rbind(c(1, 1, 1, 2, 2, 2, 2))
+    # 
+    # return(grid.arrange(count_plt, 
+    #                    zscore_plt, 
+    #                    layout_matrix = plot_layout))
+}
+
+plot_side_by_side_barplot_for_genes <- function(gene_data, normalized_input_values) {
+    if (normalized_input_values) {
+        ##create barplot of z-score data
+        caption <- paste(strwrap("Shaded area indicates z-score=2 boundary of 95%", 40),
+                     collapse = "\n")
+        zscore_plt <- ggplot(data = gene_data,
+                            mapping = aes(x = cond_bait, 
                                       y = z_score_spectral, 
                                       fill = name)) +
-        geom_rect(aes(xmin = -Inf, xmax = Inf, ymin = -2.0, ymax = 2.0),
-            alpha = 0.01,
-            fill = "red") +
+        annotate("rect", xmin = -Inf, xmax = Inf, ymin = -2.0, ymax = 2.0, 
+                 alpha=0.2, fill="red") +
+        
         geom_bar(stat = "identity", 
                  position = position_dodge2(width = 0.9, preserve = "single")) +
         ylab("z-score") +
         theme_minimal() +
         theme(axis.text.x = element_text(angle = 60, hjust = 1),
-              axis.title.x = element_blank(),
-              plot.margin = unit(plot_margins, "cm")) +
+              axis.title.x = element_blank()) +
         annotate(geom = "text", 
                  x = -Inf, 
-                 y = range(tmp$z_score_spectral)[2], 
+                 y = range(gene_data$z_score_spectral)[2], 
                  label = caption, 
                  hjust = 0, 
                  vjust = 1, 
                  size = 3) +
         labs(fill = "short ID")
-    
-    ## arrange and return
-    plot_layout <- rbind(c(1, 1, 1, 2, 2, 2, 2))
-    
-    return(grid.arrange(count_plt, 
-                       zscore_plt, 
-                       layout_matrix = plot_layout))
+        return(zscore_plt)
+    } else {
+        ##create barplot of count data
+        count_plt <- ggplot(data = gene_data,
+                            mapping = aes(x = cond_bait, 
+                                          y = spectral_count, 
+                                          fill = name)) +
+            geom_bar(stat = "identity", 
+                     position = position_dodge2(width = 0.9, preserve = "single")) +
+            ylab("spectral count") +
+            theme_minimal() +
+            theme(axis.text.x = element_text(angle = 60, hjust = 1),
+                  axis.title.x = element_blank())   
+        return(count_plt)
+    }
 }
 
-#test <- get_gene_conditions_table(c("sp|P15064|RASG_DICDI", "sp|P32253|RASC_DICDI"))
-#plot_bargraph_for_gene(test)
+plot_faceted_bargraph_for_genes <- function(gene_data, normalized_input_values) {
+    if (normalized_input_values) {
+        ##create barplot of z-score data
+        caption <- paste(strwrap("Shaded area indicates z-score=2 boundary of 95%", 40),
+                     collapse = "\n")
+        zscore_plt <- ggplot(data = gene_data,
+                            mapping = aes(x = cond_bait, 
+                                      y = z_score_spectral, 
+                                      fill = name)) +
+        annotate("rect", xmin = -Inf, xmax = Inf, ymin = -2.0, ymax = 2.0, 
+                 alpha=0.2, fill="red") +
+        
+        geom_bar(stat = "identity") +
+        annotate(geom = "text", 
+                 x = -Inf, 
+                 y = range(gene_data$z_score_spectral)[2], 
+                 label = caption, 
+                 hjust = 0, 
+                 vjust = 1, 
+                 size = 3) +
+        facet_wrap(. ~ name) +
+        ylab("z-score") +
+        theme_minimal() +
+        theme(axis.text.x = element_text(angle = 60, hjust = 1),
+              axis.title.x = element_blank(),
+              legend.position = "none") + 
+        labs(fill = "short ID")
+        return(zscore_plt)
+    } else {
+        ##create barplot of count data
+        # plot_margins <- c(0.5, 0.5, 0.5, 1)
+        count_plt <- ggplot(data = gene_data,
+                            mapping = aes(x = cond_bait, 
+                                          y = spectral_count, 
+                                          fill = name)) +
+            geom_bar(stat = "identity") +
+            facet_wrap(. ~ name) +
+            ylab("spectral count") +
+            theme_minimal() +
+            theme(axis.text.x = element_text(angle = 60, hjust = 1),
+                  axis.title.x = element_blank(),
+                  legend.position = "none")
+        return(count_plt)
+    }
+}
+
+
+#q <- c("sp|P0A6F5|CH60_ECOLI","sp|P08622|DNAJ_ECOLI","sp|Q869S8|PSMG2_DICDI", "sp|P0A6M8|EFG_ECOLI")
+#test <- get_gene_conditions_table(q)
+#print(plot_bargraph_for_gene(get_gene_conditions_table(q[1:3])))
 
 
