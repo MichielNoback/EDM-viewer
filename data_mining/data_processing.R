@@ -2,6 +2,7 @@ library(dplyr)
 library(readr)
 library(tidyr)
 library(stringr)
+library(UniprotR)
 
 data_dir <- '../data/'
 
@@ -214,7 +215,20 @@ rename_to_short_uniprot <- function(){
   return(wdbc.pr_roco4_corrected)
 }
 
-
+#' Get Go annotation using accession from uniprot
+#' scraping uniprot for GO terms is slow!, so this should be done once
+#' result annotation file is saved to "UniverseGo.RData"
+#' rownames = uniprot id
+#' columns: ID, GO, biologial.process, molecular.function, cellular.component
+#' @param my_data data_frame containing uniprot ids
+#' @example 
+#' scrape_GO_annotation_from_uniprot(my_data = all_data_dicty)
+scrape_GO_annotation_from_uniprot <- function(my_data = all_data_dicty){
+  accessions <- get_uniprot(unique(my_data$uniprot))
+  # query uniprot for the GO annotation
+  universeGO <- UniprotR::GetProteinGOInfo(accessions) 
+  save(universeGO, file = "UniverseGo.RData")
+}
 
 
 #write.table(all_data_dicty , file = "all_data_dicty.txt", row.names = FALSE, quote = FALSE, sep = '\t')
