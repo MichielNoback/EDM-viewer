@@ -2,8 +2,6 @@ suppressMessages(library(DT))
 
 ## Tab gene selection: ID search en conditions
 ## Tab voor visualisatie met subtabs voor bar/heat etx
-## By barplot keuze tussen gecombineerd en faceted
-## Tab voor download van current data selection
 
 source("R/data_functions.R")
 source("R/plotting_functions.R")
@@ -36,12 +34,14 @@ server <- function(input, output, session) {
     # the gene being searched, as it is typed
     # returns the tibble with matching entries from the all_data dataset
     suggested_genes <- reactive({
-        req(input$gene_search)
+        #req(input$gene_search)
         message(paste0("[suggested_genes]: ", input$gene_search), 
                 "; filtering ", nrow(all_data), " data rows")
         ##resets the row selection when a new search is being performed
         selected_rows_indices(character(0))
-        get_matching_genes_for_long_id_or_uniprot(input$gene_search)
+        get_matching_genes_for_long_id_or_uniprot(
+            input$gene_search, 
+            input$only_dicdi_genes)
     })
 
     ## holds the selected row indices of the suggestion list

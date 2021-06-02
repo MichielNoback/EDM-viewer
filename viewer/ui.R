@@ -3,6 +3,9 @@ library(shinyWidgets)
 # build top-level tab for genes query
 geneSearchTab <- sidebarLayout(
     sidebarPanel(
+        checkboxInput(inputId = "only_dicdi_genes",
+                      label = "Only Dictyostelium",
+                      value = TRUE),
         textInput(inputId = "gene_search",
                   label = "Find gene(s)"),
         dataTableOutput(outputId = "suggested_genes"),

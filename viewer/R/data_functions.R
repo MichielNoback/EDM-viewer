@@ -12,15 +12,21 @@ suppressMessages(library(tidyr))
 #' @return tibble with rows matching the ID pattern 
 #' @examples 
 #' get_matching_genes_for_long_id_or_uniprot("chap")
-get_matching_genes_for_long_id_or_uniprot <- function(pattern) {
+get_matching_genes_for_long_id_or_uniprot <- function(pattern, only_dictyostelium = TRUE) {
     if (is.null(pattern) || nchar(pattern) < 3) {
         return(tibble(long_id = character(), uniprot = character()))
     } else {
-        return(all_data %>%
+        tmp <- all_data %>%
             filter(str_detect(long_id, regex(pattern, ignore_case = TRUE)) |
-                str_detect(uniprot, regex(pattern, ignore_case = TRUE))) %>%
+                str_detect(uniprot, regex(pattern, ignore_case = TRUE))) 
+
+        if (only_dictyostelium) {
+            tmp <- tmp %>% filter(str_detect(organism, "Dictyostelium"))
+        }
+        tmp <- tmp %>% 
             select(long_id, uniprot) %>%
-            distinct())
+            distinct()
+        return(tmp)
     }
 }
 
