@@ -2,6 +2,8 @@ suppressMessages(library(ggplot2))
 suppressMessages(library(gridExtra))
 suppressMessages(library(dplyr))
 suppressMessages(library(tidyr))
+library(igraph)
+library(visNetwork)
 
 #' Create bar graphs for spectral count and its z-score
 #' 
@@ -55,8 +57,10 @@ plot_side_by_side_barplot_for_genes <- function(gene_data, normalized_input_valu
                             mapping = aes(x = cond_bait, 
                                       y = z_score_spectral, 
                                       fill = name)) +
-        annotate("rect", xmin = -Inf, xmax = Inf, ymin = -2.0, ymax = 2.0, 
-                 alpha=0.2, fill="red") +
+        geom_hline(yintercept = 2, linetype = "dashed", color = "red") +
+        geom_hline(yintercept = -2, linetype = "dashed", color = "red") +
+        # annotate("rect", xmin = -Inf, xmax = Inf, ymin = -2.0, ymax = 2.0, 
+        #          alpha=0.2, fill="red") +
         
         geom_bar(stat = "identity", 
                  position = position_dodge2(width = 0.9, preserve = "single")) +
@@ -98,8 +102,11 @@ plot_faceted_bargraph_for_genes <- function(gene_data, normalized_input_values) 
                             mapping = aes(x = cond_bait, 
                                       y = z_score_spectral, 
                                       fill = name)) +
-        annotate("rect", xmin = -Inf, xmax = Inf, ymin = -2.0, ymax = 2.0, 
-                 alpha=0.2, fill="red") +
+        geom_hline(yintercept = 2, linetype = "dashed", color = "red") +
+        geom_hline(yintercept = -2, linetype = "dashed", color = "red") +
+
+        # annotate("rect", xmin = -Inf, xmax = Inf, ymin = -2.0, ymax = 2.0, 
+        #          alpha=0.2, fill="red") +
         
         geom_bar(stat = "identity") +
         annotate(geom = "text", 
@@ -135,6 +142,62 @@ plot_faceted_bargraph_for_genes <- function(gene_data, normalized_input_values) 
     }
 }
 
+#' Create an interactive igraph network plot. 
+#' Interacting proteins are represented as circles and baits are depicted as triangles
+#' Edges between nodes are scaled by spectral count (z-score)
+#' Packages required:
+#' library(igraph)
+#' library(visNetwork)
+#' @param my_data all_dicty or subset (i.e. background corrected version) of this dataframe
+#' @param filter_cutof used cutoff value for filtering on minimal spectral count, default 30
+#' @example show_igraph_network_plot(all_data_dicty, filter_cutof = 20)
+#' show_igraph_network_plot(my_data = all_data_dicty)
+show_igraph_network_plot <- function(
+    my_data = all_data_dicty, 
+    filter_cutof = 30){
+  my_data <- my_data %>%
+    group_by(bait, condition) %>% 
+    tidyr::unite(bait_condition, c(bait, condition), sep = "_")
+  
+  # split the uniprot column in the indivdual parts
+  my_data_splitted_uniprot <- my_data %>% 
+    separate(uniprot, c("a", "b", "c", "protid", "genid", "source"), extra = "merge", fill = "left", sep = '[_|]')
+  
+  # remove "garbage" columns and keep the protid, geneid and source columns
+  my_data_splitted_uniprot <- my_data_splitted_uniprot %>% 
+    dplyr::select(-one_of(c("a", "b", "c")))
+  
+  # resulting in 17k+ interactions, hairball!, need to filter
+  my_data_splitted_uniprot_threshold_filtered <- my_data_splitted_uniprot %>% 
+    filter(spectral_count > 30)
+  
+  nodes <- as.data.frame(unique(my_data_splitted_uniprot_threshold_filtered$bait_condition))
+  nodes$shape = 'triangle'
+  colnames(nodes) <- c('id', 'shape')
+  
+  # create the nodes
+  nodes <- nodes %>% 
+    add_row(id = unique(my_data_splitted_uniprot_threshold_filtered$genid), shape = 'circle')
+  nodes$label <- nodes$id
+  
+  # define edges
+  my_edges <- data.frame(my_data_splitted_uniprot_threshold_filtered$bait_condition, 
+                         my_data_splitted_uniprot_threshold_filtered$genid, 
+                         my_data_splitted_uniprot_threshold_filtered$z_score_spectral)
+  colnames(my_edges) <- c('from', 'to', 'value')
+  
+  # create the graph
+  graph <- graph_from_data_frame(my_edges, directed = FALSE)
+  
+  # show the network
+  visNetwork(nodes = nodes, edges = my_edges) %>%
+    visOptions(highlightNearest = list(enabled = TRUE, 
+                                       algorithm = "hierarchical", 
+                                       degree = list(from = 1, to = 1)), 
+                                       nodesIdSelection = TRUE) %>%
+                                          visPhysics(stabilization = FALSE) %>%
+                                          visLayout(improvedLayout = TRUE)
+}
 
 #q <- c("sp|P0A6F5|CH60_ECOLI","sp|P08622|DNAJ_ECOLI","sp|Q869S8|PSMG2_DICDI", "sp|P0A6M8|EFG_ECOLI")
 #test <- get_gene_conditions_table(q)

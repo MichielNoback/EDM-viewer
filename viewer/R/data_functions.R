@@ -3,7 +3,6 @@
 suppressMessages(library(dplyr))
 suppressMessages(library(tidyr))
 
-
 #' Returns a tibble of genes for the given search string
 #' 
 #' Will look in both long-id and uniprot columns.
@@ -95,6 +94,9 @@ get_gene_summary_table <- function(gene_tibble) {
                       .groups = "drop") %>%
             distinct())
 }
+
+
+
 
 
 

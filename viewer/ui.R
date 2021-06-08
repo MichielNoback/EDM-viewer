@@ -8,15 +8,16 @@ geneSearchTab <- sidebarLayout(
                       value = TRUE),
         textInput(inputId = "gene_search",
                   label = "Find gene(s)"),
-        dataTableOutput(outputId = "suggested_genes"),
+        DT::dataTableOutput(outputId = "suggested_genes"),
         width = 5
     ),
 
     mainPanel(
         h4("Selected genes"),
-        dataTableOutput(outputId = "selected_genes_for_barplot"),
+        DT::dataTableOutput(outputId = "selected_genes_for_barplot"),
         br(""),
-        downloadButton("download_selected_genes", "Download selection"),
+        downloadButton("download_selected_genes_csv", "Download as csv"),
+        downloadButton("download_selected_genes_xlsx", "Download as Excel"),
         width = 7
     )
 )
@@ -47,9 +48,14 @@ geneVisualizationTab <- sidebarLayout(
                   no = icon("remove",
                         lib = "glyphicon")))
     ),
-
     mainPanel(
         plotOutput("gene_conditions_bar"),
+    )
+)
+
+igraph_tab <- fluidPage(
+    fluidRow(
+        visNetworkOutput(outputId = "igraph_plot")
     )
 )
 
@@ -60,9 +66,8 @@ ui <- fluidPage(
     tabsetPanel(id = "main-tabs", 
                 type = "tabs",
                 tabPanel("Select Genes", geneSearchTab),
-                tabPanel("Visualize", geneVisualizationTab)))
-#                tabPanel("Filter Genes", geneFilterTab),
-#)
+                tabPanel("Visualize", geneVisualizationTab),
+                tabPanel("Interaction Graph", igraph_tab)))
 
 
 # build top-level tab for gene filtering
