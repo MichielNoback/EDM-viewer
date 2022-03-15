@@ -25,8 +25,8 @@ get_celltypes <- function() {
 #' @examples
 #' read_primary("dicty)
 read_primary <- function(celltype) {
-    tmp <- read_delim(file = paste0(here(), "/viewer/data/all_data_", celltype, ".txt"),
-               delim = "\t+",
+    tmp <- readr::read_delim(file = paste0(here(), "/viewer/data/all_data_", celltype, ".txt"),
+               delim = "\t",
                col_types = c("ccclffidcfccccc"))
     tmp %>% 
         mutate(mw = stringr::str_replace(mw, "(\\d) kDa", "\\1")) %>%
